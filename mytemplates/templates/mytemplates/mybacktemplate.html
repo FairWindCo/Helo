@@ -1,0 +1,561 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        <title>{% block title %}{% endblock %}</title>
+
+        <meta name="description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework">
+        <meta property="og:site_name" content="OneUI">
+        <meta property="og:description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+        {% block meta %}{% endblock %}
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{% static 'assets/media/favicons/favicon.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'assets/media/favicons/favicon-192x192.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/media/favicons/apple-touch-icon-180x180.png' %}">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Fonts and OneUI framework -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+        <link rel="stylesheet" id="css-main" href="{% static 'assets/css/oneui.min.css' %}">
+
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/amethyst.min.css"> -->
+        <!-- END Stylesheets -->
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% block main %}
+        <div id="page-container" class="sidebar-o sidebar-dark side-scroll page-header-fixed page-header-dark main-content-boxed">
+            {% block aside-bar %}
+                <aside id="side-overlay" class="font-size-sm">
+                    {% block aside-bar-content %}
+                        {% block aside-bar-header %}
+                                <!-- Side Header -->
+                                <div class="content-header border-bottom">
+                                    {% block aside-bar-header-content %}
+                                    <!-- User Avatar -->
+                                        {% block aside-bar-header-content-avatar %}
+                                    <a class="img-link mr-1" href="{% block aside-bar-header-content-avatar-link %}javascript:void(0){% endblock %}">
+                                        <img class="img-avatar img-avatar32" src="{% block aside-bar-header-content-avatar-image %}assets/media/avatars/avatar10.jpg{% endblock %}" alt="">
+                                    </a>
+                                    <!-- END User Avatar -->
+                                        {% endblock %}
+                                        {% block aside-bar-header-content-user %}
+                                    <!-- User Info -->
+                                    <div class="ml-2">
+                                        <a class="link-fx text-dark font-w600" href="{% block aside-bar-header-content-user-link %}javascript:void(0){% endblock %}">{% block aside-bar-header-content-user-name %}Administrator{% endblock %}</a>
+                                    </div>
+                                    <!-- END User Info -->
+                                            {% endblock %}
+                                    {% endblock %}
+                                    <!-- Close Side Overlay -->
+                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <a class="ml-auto btn btn-sm btn-alt-danger" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_close">
+                                        <i class="fa fa-fw fa-times text-danger"></i>
+                                    </a>
+                                    <!-- END Close Side Overlay -->
+                                </div>
+                                <!-- END Side Header -->
+                        {% endblock %}
+                        {% block aside-bar-content-body %}
+                            <!-- Side Content -->
+                            <div class="content-side">
+                                {% block aside-bar-content-body-content %}
+                                    <!-- Side Overlay Tabs -->
+                                    <div class="block block-transparent pull-x pull-t">
+                                        <ul class="nav nav-tabs nav-tabs-alt nav-justified" data-toggle="tabs" role="tablist">
+                                        {%  block aside-bar-content-body-content-tabs-list %}
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="#so-section1">
+                                                    <i class="fa fa-fw fa-link text-gray mr-1"></i> Section 1
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#so-section2">
+                                                    <i class="fa fa-fw fa-link text-gray mr-1"></i> Section 2
+                                                </a>
+                                            </li>
+                                        {% endblock %}
+                                        </ul>
+                                        <div class="block-content tab-content overflow-hidden">
+                                            {% block aside-bar-content-body-content-tabs %}
+                                                <!-- Section 1 -->
+                                                <div class="tab-pane pull-x fade fade-left show active" id="so-section1" role="tabpanel">
+                                                    <div class="block">
+                                                        <div class="block-header block-header-default">
+                                                            <h3 class="block-title">Section 1</h3>
+                                                            <div class="block-options">
+                                                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                                                    <i class="si si-refresh"></i>
+                                                                </button>
+                                                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="block-content">
+                                                            <p>
+                                                                ...
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- END Section 1 -->
+
+                                                <!-- Section 2 -->
+                                                <div class="tab-pane pull-x fade fade-right" id="so-section2" role="tabpanel">
+                                                    <div class="block">
+                                                        <div class="block-header block-header-default">
+                                                            <h3 class="block-title">Section 2</h3>
+                                                            <div class="block-options">
+                                                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                                                    <i class="si si-refresh"></i>
+                                                                </button>
+                                                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="block-content">
+                                                            <p>
+                                                                ...
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- END Section 2 -->
+                                            {% endblock %}
+                                        </div>
+                                    </div>
+                                {% endblock %}
+                            </div>
+                            <!-- END Side Content -->
+                        {% endblock %}
+                    {% endblock %}
+                </aside>
+                    <!-- END Side Overlay -->
+            {% endblock %}
+            {% block sidebar %}
+                <nav id="sidebar" aria-label="Main Navigation">
+                    {% block sidebar-header %}
+                    <div class="content-header bg-white-5">
+                        {% block sidebar-header-logo %}
+                        <a class="font-w600 text-dual" href="">
+                            <i class="fa {% block sidebar-header-logo-class %}fa-circle-notch{% endblock %} text-primary"></i>
+                            <span class="smini-hide">
+                                <span class="font-w700 font-size-h5">{% block sidebar-header-logo-text %}ne{% endblock %}</span>
+                            </span>
+                        </a>
+                        {% endblock %}
+                        {% block sidebar-header-options %}
+                            <!-- Options -->
+                            <div>
+                                {% block sidebar-header-options-addons %}
+                                {% endblock %}
+                                <!-- Color Variations -->
+                                <div class="dropdown d-inline-block ml-3">
+                                    <a class="text-dual font-size-sm" id="sidebar-themes-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="si si-drop"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right font-size-sm smini-hide border-0" aria-labelledby="sidebar-themes-dropdown">
+                                        <!-- Color Themes -->
+                                        <!-- Layout API, functionality initialized in Template._uiHandleTheme() -->
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="default" href="#">
+                                            <span>Default</span>
+                                            <i class="fa fa-circle text-default"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/amethyst.min.css' %}" href="#">
+                                            <span>Amethyst</span>
+                                            <i class="fa fa-circle text-amethyst"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/city.min.css' %}" href="#">
+                                            <span>City</span>
+                                            <i class="fa fa-circle text-city"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/flat.min.css' %}" href="#">
+                                            <span>Flat</span>
+                                            <i class="fa fa-circle text-flat"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/modern.min.css' %}" href="#">
+                                            <span>Modern</span>
+                                            <i class="fa fa-circle text-modern"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/smooth.min.css' %}" href="#">
+                                            <span>Smooth</span>
+                                            <i class="fa fa-circle text-smooth"></i>
+                                        </a>
+                                        <!-- END Color Themes -->
+                                    </div>
+                                </div>
+                                <!-- END Themes -->
+
+                                <!-- Close Sidebar, Visible only on mobile screens -->
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                <a class="d-lg-none text-dual ml-3" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                <!-- END Close Sidebar -->
+                            </div>
+                            <!-- END Options -->
+                        {% endblock %}
+                    </div>
+                        <!-- END Side Header -->
+                        {% block sidebar-nav %}
+                        <!-- Side Navigation -->
+                        <div class="content-side content-side-full">
+                            <ul class="nav-main">
+                                {% block sidebar-nav-items-content %}
+                                {% endblock %}
+                            </ul>
+                        </div>
+                        <!-- END Side Navigation -->
+                        {% endblock %}
+                    {% endblock %}
+                <!-- END Sidebar -->
+                    {% block sidebar-content %}
+                <!-- Side Navigation -->
+                    <div class="content-side content-side-full">
+                        {% block sidebar-content-menu %}
+                        <ul class="nav-main">
+                             {% block sidebar-nav-items %}
+                                 {% block sidebar-content-menu-home %}
+                                   <li class="nav-main-item">
+                                        <a class="nav-main-link active" href="{% block sidebar-content-menu-home-link %}gs_landing.html{% endblock %}">
+                                            <i class="nav-main-link-icon si {% block sidebar-content-menu-home-css %}si-home{% endblock %}"></i>
+                                            <span class="nav-main-link-name">{% block sidebar-content-menu-home-text %}Home{% endblock %}</span>
+                                        </a>
+                                    </li>
+                                 {% endblock %}
+
+                            {% block sidebar-content-menu-dashboard %}
+                            <li class="nav-main-item">
+                                <a class="nav-main-link active" href="{% block sidebar-content-menu-dashboard-link %}#{% endblock %}">
+                                    <i class="nav-main-link-icon si si-speedometer"></i>
+                                    <span class="nav-main-link-name">Dashboard</span>
+                                </a>
+                            </li>
+                            {% endblock %}
+                            {% block sidebar-content-menu-heading %}
+                            <li class="nav-main-heading">{% block sidebar-content-menu-heading-text %}Heading{% endblock %}</li>
+                            {% endblock %}
+                            {% block sidebar-content-menu-items %}
+                            <li class="nav-main-item">
+                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                    <i class="nav-main-link-icon si si-puzzle"></i>
+                                    <span class="nav-main-link-name">Dropdown</span>
+                                </a>
+                                {% block sidebar-content-menu-items-sub %}
+                                     <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" href="javascript:void(0)">
+                                                <span class="nav-main-link-name">Link #1</span>
+                                            </a>
+                                        </li>
+                                     </ul>
+                                {% endblock %}
+                            </li>
+                            {% endblock %}
+                            {% block sidebar-nav-items-addon %}
+                            {% endblock %}
+                        {% endblock %}
+                        </ul>
+                        {% endblock %}
+                    </div>
+                    {% endblock %}
+                </nav>
+            {% endblock %}
+            {% block header %}
+            <!-- Header -->
+            <header id="page-header">
+                <!-- Header Content -->
+                {% block header-body %}
+                <div class="content-header">
+                    {% block header-content %}
+                    {% block header-content-left %}
+                            <!-- Left Section -->
+                            <div class="d-flex align-items-center">
+                                {% block sidebar-hide-btn %}
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+                                <button type="button" class="btn btn-sm btn-dual mr-2 d-lg-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_toggle">
+                                    <i class="fa fa-fw fa-bars"></i>
+                                </button>
+                                <!-- END Toggle Sidebar -->
+                                {% endblock %}
+                                <!-- Toggle Mini Sidebar -->
+                                {% block sidebar-small-btn %}
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+                                <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
+                                    <i class="fa fa-fw fa-ellipsis-v"></i>
+                                </button>
+                                <!-- END Toggle Mini Sidebar -->
+                                {% endblock %}
+                                <!-- Open Search Section (visible on smaller screens) -->
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                <button type="button" class="btn btn-sm btn-dual d-sm-none " data-toggle="layout" data-action="header_search_on">
+                                    <i class="si si-magnifier"></i>
+                                </button>
+                                <!-- END Open Search Section -->
+
+                                <!-- Search Form (visible on larger screens) -->
+                                <form class="d-none d-sm-inline-block" method="POST">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text bg-body border-0">
+                                                <i class="si si-magnifier"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END Search Form -->
+                            </div>
+                            <!-- END Left Section -->
+
+                        {% endblock %}
+                    {% block header-content-right %}
+                    <!-- Right Section -->
+                    <div class="d-flex align-items-center">
+                        {% block header-user-menu %}
+                        <!-- User Dropdown -->
+                        <div class="dropdown d-inline-block ml-2">
+                            <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded" src="{% block avatar-img-link-small %}{% static 'assets/media/avatars/avatar10.jpg' %}{% endblock %}" alt="Header Avatar" style="width: 18px;">
+                                <span class="d-none d-sm-inline-block ml-1">Adam</span>
+                                <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
+                                <div class="p-3 text-center bg-primary">
+                                    <img class="img-avatar img-avatar48 img-avatar-thumb" src="{% block avatar-img-link %}{% static 'assets/media/avatars/avatar10.jpg' %}{% endblock %}" alt="">
+                                </div>
+                                <div class="p-2">
+                                    {% block user-dropdown-menu %}
+                                    <h5 class="dropdown-header text-uppercase">{% block user-dropdown-menu-headertext %}User Options{% endblock %}</h5>
+                                        {% block user-dropdown-menu-inbox %}
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                            <span>{% block user-dropdown-menu-inbox-text %}Inbox{% endblock %}</span>
+                                            <span>
+                                                <span class="badge badge-pill {% block user-dropdown-menu-inbox-count-icon %}badge-primary{% endblock %}">{% block user-dropdown-menu-inbox-count %}3{% endblock %}</span>
+                                                <i class="si {% block user-dropdown-menu-inbox-icon %}si-envelope-open{% endblock %} ml-1"></i>
+                                            </span>
+                                        </a>
+                                        {% endblock %}
+                                        {% block user-dropdown-menu-profile %}
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                            <span>{% block user-dropdown-menu-profile-text %}Profile{% endblock %}</span>
+                                            <span>
+                                                <span class="badge badge-pill {% block user-dropdown-menu-profile-count-icon %}badge-success{% endblock %}">{% block user-dropdown-menu-profile-count %}1{% endblock %}</span>
+                                                <i class="si {% block user-dropdown-menu-profile-icon %}si-user{% endblock %} ml-1"></i>
+                                            </span>
+                                        </a>
+                                        {% endblock %}
+                                        {% block user-dropdown-menu-settings %}
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                            <span>{% block user-dropdown-menu-settings-text %}Settings{% endblock %}</span>
+                                            <i class="si {% block user-dropdown-menu-settings-icon %}si-settings{% endblock %}"></i>
+                                        </a>
+                                        {% endblock %}
+                                        {% block user-dropdown-menu-actions %}
+                                            <div role="separator" class="dropdown-divider"></div>
+
+                                        <h5 class="dropdown-header text-uppercase">{% block user-dropdown-menu-actiontext %}Actions{% endblock %}</h5>
+                                            {% block user-dropdown-menu-actions-lock %}
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                            <span>{% block user-dropdown-menu-actions-lock-text %}Lock Account{% endblock %}</span>
+                                            <i class="si {% block user-dropdown-menu-actions-lock-icon %}si-lock{% endblock %} ml-1"></i>
+                                        </a>
+                                                {% endblock %}
+                                            {% block user-dropdown-menu-actions-logout %}
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                            <span>{% block user-dropdown-menu-actions-logout-text %}Log Out{% endblock %}</span>
+                                            <i class="si {% block user-dropdown-menu-actions-logout-icon %}si-logout{% endblock %} ml-1"></i>
+                                        </a>
+                                                {% endblock %}
+                                        {% endblock %}
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END User Dropdown -->
+                        {% endblock %}
+                        {% block header-notify-menu %}
+                        <!-- Notifications Dropdown -->
+                        <div class="dropdown d-inline-block ml-2">
+                            <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="si {% block header-notify-menu-icon %}si-bell{% endblock %}"></i>
+                                <span class="badge badge-primary badge-pill">{% block header-notify-menu-cnt %}6{% endblock %}</span>
+                            </button>
+                            {% block header-notify-menu-submenu %}
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
+                                {% block header-notify-menu-submenu-header %}
+                                <div class="p-2 bg-primary text-center">
+                                    <h5 class="dropdown-header text-uppercase text-white">{% block header-notify-menu-submenu-header-text %}Notifications{% endblock %}</h5>
+                                </div>
+                                {% endblock %}
+                                {% block header-notify-menu-submenu-items %}
+                                <ul class="nav-items mb-0">
+                                    {% block header-notify-menu-items %}
+                                    <li>
+                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="mr-2 ml-3">
+                                                <i class="fa fa-fw {% block header-notify-menu-item-icon%}fa-check-circle{% endblock %} text-success"></i>
+                                            </div>
+                                            <div class="media-body pr-2">
+                                                <div class="font-w600">{% block header-notify-menu-item-text%}You have a new follower{% endblock %}</div>
+                                                <small class="text-muted">{% block header-notify-menu-item-icon-detail%}15 min ago{% endblock %}</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {% endblock %}
+                                </ul>
+                                {% endblock %}
+                                {% block header-notify-menu-submenu-more %}
+                                <div class="p-2 border-top">
+                                    <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
+                                        <i class="fa fa-fw fa-arrow-down mr-1"></i> {% block header-notify-menu-submenu-more-text %}Load More..{% endblock %}
+                                    </a>
+                                </div>
+                                {% endblock %}
+                            </div>
+                            {% endblock %}
+                        </div>
+                        <!-- END Notifications Dropdown -->
+                        {% endblock %}
+                        {% block heder-aside-btn %}
+                        <!-- Toggle Side Overlay -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <button type="button" class="btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="side_overlay_toggle">
+                            <i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i>
+                        </button>
+                        <!-- END Toggle Side Overlay -->
+                        {% endblock %}
+                    </div>
+                    <!-- END Right Section -->
+                    {% endblock %}
+                    {% endblock %}
+                </div>
+                {% endblock %}
+            </header>
+            {% endblock %}
+
+            {% block content %}
+                <main id="main-container">
+                    {% block main-content %}
+                        {% block content-header-panel %}
+                        <!-- Hero -->
+                        <div class=" block bg-body-light">
+                    <div class="content content-full block-content">
+                        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                            <h1 class="flex-sm-fill h3 my-2">
+                                {% block content-header-text %}Page Title <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">Subtitle</small>{% endblock %}
+                            </h1>
+
+
+
+                            {% block content-header-breadcamp %}
+                            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                                <ol class="breadcrumb breadcrumb-alt">
+                                    {% block content-header-breadcamp-items %}
+                                    <li class="breadcrumb-item">
+                                        <a href="javascript:void(0)">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="javascript:void(0)">Account</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">Current</li>
+                                    {% endblock %}
+                                </ol>
+                            </nav>
+                            {% endblock %}
+
+                                <div class="block-options">
+                                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="close">
+                                                <i class="si si-close"></i>
+                                            </button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                        <!-- END Hero -->
+                        {% endblock %}
+                        {% block main-content-page %}
+                            <!-- Page Content -->
+                            <div class="content">
+                                {% block main-content-area %}
+                                    {% block main-content-area-block %}
+                                    <!-- Your Block -->
+                                    <div class="block">
+                                    <div class="block-header">
+                                        <h3 class="block-title">
+                                            {% block main-content-area-block-header %}Title <small>Get Started</small>{% endblock %}
+                                        </h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
+                                                <i class="si si-pin"></i>
+                                            </button>
+                                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                                <i class="si si-refresh"></i>
+                                            </button>
+                                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="close">
+                                                <i class="si si-close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="block-content font-size-sm">
+                                        {% block main-content-area-block-content %}
+                                        <p>
+                                            Create your own awesome project!
+                                        </p>
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                                    <!-- END Your Block -->
+                                    {% endblock %}
+                                {% endblock %}
+                            </div>
+                            <!-- END Page Content -->
+                            {% endblock %}
+                    {% endblock %}
+                </main>
+            {% endblock %}
+            {% block footer %}<!-- Footer -->
+            <footer id="page-footer" class="bg-body-light">
+                <div class="content py-3">
+                    {% block footer-content %}
+                        {% block footer-content-beforerow %}
+                        {% endblock %}
+                    <div class="row font-size-sm">
+                        {% block footer-content-row %}
+                        <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
+                            Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="http://manenok.pp.ua" target="_blank">FairWind</a>
+                        </div>
+                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
+                            <a class="font-w600" href="https://1.envato.market/AVD6j" target="_blank">FairWind Django 1.0</a> &copy; <span data-toggle="year-copy"></span>
+                        </div>
+                        {% endblock %}
+                    </div>
+                    {% block footer-content-nextrow %}
+                    {% endblock %}
+                    {% endblock %}
+                </div>
+            </footer>
+            <!-- END Footer -->
+            {% endblock %}
+        </div>
+        {% endblock %}
+
+        <!-- OneUI JS -->
+        <script src="{% static 'assets/js/oneui.core.min.js' %}"></script>
+        <script src="{% static 'assets/js/oneui.app.min.js' %}"></script>
+    </body>
+</html>

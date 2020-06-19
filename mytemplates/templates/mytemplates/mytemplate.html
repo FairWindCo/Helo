@@ -1,0 +1,297 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        <title>{% block title %}{% endblock %}</title>
+
+        <meta name="description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework">
+        <meta property="og:site_name" content="OneUI">
+        <meta property="og:description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+        {% block meta %}{% endblock %}
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{% static 'assets/media/favicons/favicon.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'assets/media/favicons/favicon-192x192.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/media/favicons/apple-touch-icon-180x180.png' %}">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Fonts and OneUI framework -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+        <link rel="stylesheet" id="css-main" href="{% static 'assets/css/oneui.min.css' %}">
+
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/amethyst.min.css"> -->
+        <!-- END Stylesheets -->
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% block main %}
+        <div id="page-container" class="sidebar-dark side-scroll page-header-fixed page-header-dark main-content-boxed">
+            {% block sidebar %}
+                <nav id="sidebar" aria-label="Main Navigation">
+                    {% block sidebar-header %}
+                    <div class="content-header bg-white-5">
+                        {% block sidebar-header-logo %}
+                        <a class="font-w600 text-dual" href="">
+                            <i class="fa fa-circle-notch text-primary"></i>
+                            <span class="smini-hide">
+                                <span class="font-w700 font-size-h5">ne</span>
+                            </span>
+                        </a>
+                        {% endblock %}
+                        {% block sidebar-header-options %}
+                            <!-- Options -->
+                            <div>
+                                {% block sidebar-header-options-addons %}
+                                {% endblock %}
+                                <!-- Color Variations -->
+                                <div class="dropdown d-inline-block ml-3">
+                                    <a class="text-dual font-size-sm" id="sidebar-themes-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="si si-drop"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right font-size-sm smini-hide border-0" aria-labelledby="sidebar-themes-dropdown">
+                                        <!-- Color Themes -->
+                                        <!-- Layout API, functionality initialized in Template._uiHandleTheme() -->
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="default" href="#">
+                                            <span>Default</span>
+                                            <i class="fa fa-circle text-default"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/amethyst.min.css' %}" href="#">
+                                            <span>Amethyst</span>
+                                            <i class="fa fa-circle text-amethyst"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/city.min.css' %}" href="#">
+                                            <span>City</span>
+                                            <i class="fa fa-circle text-city"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/flat.min.css' %}" href="#">
+                                            <span>Flat</span>
+                                            <i class="fa fa-circle text-flat"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/modern.min.css' %}" href="#">
+                                            <span>Modern</span>
+                                            <i class="fa fa-circle text-modern"></i>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{% static 'assets/css/themes/smooth.min.css' %}" href="#">
+                                            <span>Smooth</span>
+                                            <i class="fa fa-circle text-smooth"></i>
+                                        </a>
+                                        <!-- END Color Themes -->
+                                    </div>
+                                </div>
+                                <!-- END Themes -->
+
+                                <!-- Close Sidebar, Visible only on mobile screens -->
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                <a class="d-lg-none text-dual ml-3" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                <!-- END Close Sidebar -->
+                            </div>
+                            <!-- END Options -->
+                        {% endblock %}
+                    </div>
+                        <!-- END Side Header -->
+                        {% block sidebar-nav %}
+                        <!-- Side Navigation -->
+                        <div class="content-side content-side-full">
+                            <ul class="nav-main">
+                                 {% block sidebar-nav-items %}
+                                       <li class="nav-main-item">
+                                            <a class="nav-main-link active" href="gs_landing.html">
+                                                <i class="nav-main-link-icon si si-home"></i>
+                                                <span class="nav-main-link-name">Home</span>
+                                            </a>
+                                        </li>
+                                     {% block sidebar-nav-items-addon %}
+                                     {% endblock %}
+                                 {% endblock %}
+                            </ul>
+                        </div>
+                        <!-- END Side Navigation -->
+                        {% endblock %}
+                    {% endblock %}
+                <!-- END Sidebar -->
+                </nav>
+            {% endblock %}
+            {% block header %}
+            <!-- Header -->
+            <header id="page-header">
+                <!-- Header Content -->
+                {% block header-body %}
+                <div class="content-header">
+                    {% block header-content %}
+                    <!-- Left Section -->
+                    <div class="d-flex align-items-center">
+                        {% block header-left-section %}
+                        <!-- Logo -->
+                        <a class="font-w600 text-dual mr-3" href="">
+                            <i class="fa fa-circle-notch text-primary"></i>
+                            <span class="font-w700 font-size-h5">ne</span>
+                        </a>
+                        <!-- END Logo -->
+                        {% endblock %}
+                    </div>
+                    <!-- END Left Section -->
+
+                    <!-- Right Section -->
+                    <div class="d-flex align-items-center">
+                        {% block header-right-section %}
+                        <!-- Menu -->
+                        <div class="d-none d-lg-block">
+                            <ul class="nav-main nav-main-horizontal nav-main-hover">
+                                {% block header-menu %}
+                                    {% block header-menu-items %}
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link active" href="gs_landing.html">
+                                            <i class="nav-main-link-icon si si-home"></i>
+                                            <span class="nav-main-link-name">Home</span>
+                                        </a>
+                                    </li>
+                                        {% block header-menu-items-extra%}
+                                        {% endblock %}
+                                    {% endblock %}
+
+                                    {% block header-menu-extra %}
+                                        <li class="nav-main-heading">Extra</li>
+                                    {% endblock %}
+                                    {% block header-menu-theme %}
+                                        <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-drop"></i>
+                                    </a>
+                                    <ul class="nav-main-submenu nav-main-submenu-right">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="default" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-default"></i>
+                                                <span class="nav-main-link-name">Default</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-amethyst"></i>
+                                                <span class="nav-main-link-name">Amethyst</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/city.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-city"></i>
+                                                <span class="nav-main-link-name">City</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/flat.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-flat"></i>
+                                                <span class="nav-main-link-name">Flat</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/modern.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-modern"></i>
+                                                <span class="nav-main-link-name">Modern</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-smooth"></i>
+                                                <span class="nav-main-link-name">Smooth</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                    {% endblock %}
+                                {% endblock %}
+                            </ul>
+                        </div>
+                        <!-- END Menu -->
+
+                        <!-- Toggle Sidebar -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <button type="button" class="btn btn-sm btn-dual d-lg-none ml-1" data-toggle="layout" data-action="sidebar_toggle">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                        <!-- END Toggle Sidebar -->
+                        {% endblock %}
+                    </div>
+                    <!-- END Right Section -->
+                    {% endblock %}
+                </div>
+                <!-- END Header Content -->
+
+                <!-- Header Search -->
+                <div id="page-header-search" class="overlay-header bg-white">
+                    <div class="content-header">
+                        <form class="w-100" method="POST">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <button type="button" class="btn btn-alt-danger" data-toggle="layout" data-action="header_search_off">
+                                        <i class="fa fa-fw fa-times-circle"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END Header Search -->
+
+                <!-- Header Loader -->
+                <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
+                <div id="page-header-loader" class="overlay-header bg-primary-lighter">
+                    <div class="content-header">
+                        <div class="w-100 text-center">
+                            <i class="fa fa-fw fa-circle-notch fa-spin text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Header Loader -->
+                {% endblock %}
+            </header>
+            <!-- END Header -->
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+            {% block footer %}<!-- Footer -->
+            <footer id="page-footer" class="bg-body-light">
+                <div class="content py-3">
+                    {% block footer-content %}
+                        {% block footer-content-beforerow %}
+                        {% endblock %}
+                    <div class="row font-size-sm">
+                        {% block footer-content-row %}
+                        <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
+                            Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="http://manenok.pp.ua" target="_blank">FairWind</a>
+                        </div>
+                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
+                            <a class="font-w600" href="https://1.envato.market/AVD6j" target="_blank">FairWind Django 1.0</a> &copy; <span data-toggle="year-copy"></span>
+                        </div>
+                        {% endblock %}
+                    </div>
+                    {% block footer-content-nextrow %}
+                    {% endblock %}
+                    {% endblock %}
+                </div>
+            </footer>
+            <!-- END Footer -->
+            {% endblock %}
+        </div>
+        {% endblock %}
+
+        <!-- OneUI JS -->
+        <script src="{% static 'assets/js/oneui.core.min.js' %}"></script>
+        <script src="{% static 'assets/js/oneui.app.min.js' %}"></script>
+    </body>
+</html>

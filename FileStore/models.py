@@ -64,8 +64,8 @@ class Project:
 
 class Tag:
     name: models.TextField(max_length=250, verbose_name='Метка', unique=True)
-    files: models.ManyToManyField(to=ProjectFile, related_name='tags')
-    projects: models.ManyToManyField(to=Project, related_name='tags')
+    files: models.ManyToManyField(to=ProjectFile, related_name='files_tags', null=True, blank=True)
+    projects: models.ManyToManyField(to="Project", related_name='project_tags', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Метка'

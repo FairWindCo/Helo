@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        <title>OneUI - Bootstrap 4 Admin Template &amp; UI Framework</title>
+
+        <meta name="description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework">
+        <meta property="og:site_name" content="OneUI">
+        <meta property="og:description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Fonts and OneUI framework -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+        <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css">
+
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/amethyst.min.css"> -->
+        <!-- END Stylesheets -->
+    </head>
+    <body>
+        <!-- Page Container -->
+        <!--
+            Available classes for #page-container:
+
+        GENERIC
+
+            'enable-cookies'                            Remembers active color theme between pages (when set through color theme helper Template._uiHandleTheme())
+
+        SIDEBAR & SIDE OVERLAY
+
+            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+            'sidebar-dark'                              Dark themed sidebar
+
+            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+            'side-overlay-o'                            Visible Side Overlay by default
+
+            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
+
+            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
+
+        HEADER
+
+            ''                                          Static Header if no class is added
+            'page-header-fixed'                         Fixed Header
+
+        HEADER STYLE
+
+            ''                                          Light themed Header
+            'page-header-dark'                          Dark themed Header
+
+        MAIN CONTENT LAYOUT
+
+            ''                                          Full width Main Content if no class is added
+            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+        -->
+        <div id="page-container" class="page-header-dark main-content-boxed">
+
+            <!-- Header -->
+            <header id="page-header">
+                <!-- Header Content -->
+                <div class="content-header">
+                    <!-- Left Section -->
+                    <div class="d-flex align-items-center">
+                        <!-- Logo -->
+                        <a class="font-w600 text-dual mr-3" href="">
+                            <i class="fa fa-circle-notch text-primary"></i>
+                            <span class="font-w700 font-size-h5">ne</span>
+                        </a>
+                        <!-- END Logo -->
+
+                        <!-- Notifications Dropdown -->
+                        <div class="dropdown d-inline-block ml-2">
+                            <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="si si-bell"></i>
+                                <span class="badge badge-primary badge-pill">6</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
+                                <div class="p-2 bg-primary text-center">
+                                    <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
+                                </div>
+                                <ul class="nav-items mb-0">
+                                    <li>
+                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="mr-2 ml-3">
+                                                <i class="fa fa-fw fa-check-circle text-success"></i>
+                                            </div>
+                                            <div class="media-body pr-2">
+                                                <div class="font-w600">You have a new follower</div>
+                                                <small class="text-muted">15 min ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="mr-2 ml-3">
+                                                <i class="fa fa-fw fa-plus-circle text-info"></i>
+                                            </div>
+                                            <div class="media-body pr-2">
+                                                <div class="font-w600">1 new sale, keep it up</div>
+                                                <small class="text-muted">22 min ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="mr-2 ml-3">
+                                                <i class="fa fa-fw fa-times-circle text-danger"></i>
+                                            </div>
+                                            <div class="media-body pr-2">
+                                                <div class="font-w600">Update failed, restart server</div>
+                                                <small class="text-muted">26 min ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="mr-2 ml-3">
+                                                <i class="fa fa-fw fa-plus-circle text-info"></i>
+                                            </div>
+                                            <div class="media-body pr-2">
+                                                <div class="font-w600">2 new sales, keep it up</div>
+                                                <small class="text-muted">33 min ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="mr-2 ml-3">
+                                                <i class="fa fa-fw fa-user-plus text-success"></i>
+                                            </div>
+                                            <div class="media-body pr-2">
+                                                <div class="font-w600">You have a new subscriber</div>
+                                                <small class="text-muted">41 min ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="mr-2 ml-3">
+                                                <i class="fa fa-fw fa-check-circle text-success"></i>
+                                            </div>
+                                            <div class="media-body pr-2">
+                                                <div class="font-w600">You have a new follower</div>
+                                                <small class="text-muted">42 min ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="p-2 border-top">
+                                    <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
+                                        <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Notifications Dropdown -->
+                    </div>
+                    <!-- END Left Section -->
+
+                    <!-- Right Section -->
+                    <div class="d-flex align-items-center">
+                        <!-- Open Search Section (visible on smaller screens) -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <button type="button" class="btn btn-sm btn-dual d-sm-none" data-toggle="layout" data-action="header_search_on">
+                            <i class="si si-magnifier"></i>
+                        </button>
+                        <!-- END Open Search Section -->
+
+                        <!-- Search Form (visible on larger screens) -->
+                        <form class="d-none d-sm-inline-block" method="POST">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-body border-0">
+                                        <i class="si si-magnifier"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END Search Form -->
+
+                        <!-- User Dropdown -->
+                        <div class="dropdown d-inline-block ml-2">
+                            <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded" src="assets/media/avatars/avatar10.jpg" alt="Header Avatar" style="width: 18px;">
+                                <span class="d-none d-sm-inline-block ml-1">Adam</span>
+                                <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
+                                <div class="p-3 text-center bg-primary">
+                                    <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/media/avatars/avatar10.jpg" alt="">
+                                </div>
+                                <div class="p-2">
+                                    <h5 class="dropdown-header text-uppercase">User Options</h5>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                        <span>Inbox</span>
+                                        <span>
+                                            <span class="badge badge-pill badge-primary">3</span>
+                                            <i class="si si-envelope-open ml-1"></i>
+                                        </span>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                        <span>Profile</span>
+                                        <span>
+                                            <span class="badge badge-pill badge-success">1</span>
+                                            <i class="si si-user ml-1"></i>
+                                        </span>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                        <span>Settings</span>
+                                        <i class="si si-settings"></i>
+                                    </a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <h5 class="dropdown-header text-uppercase">Actions</h5>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                        <span>Lock Account</span>
+                                        <i class="si si-lock ml-1"></i>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                        <span>Log Out</span>
+                                        <i class="si si-logout ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END User Dropdown -->
+                    </div>
+                    <!-- END Right Section -->
+                </div>
+                <!-- END Header Content -->
+
+                <!-- Header Search -->
+                <div id="page-header-search" class="overlay-header bg-white">
+                    <div class="content-header">
+                        <form class="w-100" method="POST">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <button type="button" class="btn btn-alt-danger" data-toggle="layout" data-action="header_search_off">
+                                        <i class="fa fa-fw fa-times-circle"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END Header Search -->
+
+                <!-- Header Loader -->
+                <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
+                <div id="page-header-loader" class="overlay-header bg-primary-lighter">
+                    <div class="content-header">
+                        <div class="w-100 text-center">
+                            <i class="fa fa-fw fa-circle-notch fa-spin text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Header Loader -->
+            </header>
+            <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Navigation -->
+                <div class="bg-white">
+                    <div class="content py-3">
+                        <!-- Toggle Main Navigation -->
+                        <div class="d-lg-none">
+                            <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
+                            <button type="button" class="btn btn-block btn-alt-secondary d-flex justify-content-between align-items-center" data-toggle="class-toggle" data-target="#main-navigation" data-class="d-none">
+                                Menu
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </div>
+                        <!-- END Toggle Main Navigation -->
+
+                        <!-- Main Navigation -->
+                        <div id="main-navigation" class="d-none d-lg-block mt-2 mt-lg-0">
+                            <ul class="nav-main nav-main-horizontal nav-main-hover">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link active" href="gs_backend_boxed.html">
+                                        <i class="nav-main-link-icon si si-speedometer"></i>
+                                        <span class="nav-main-link-name">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-heading">Heading</li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-puzzle"></i>
+                                        <span class="nav-main-link-name">Dropdown</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" href="javascript:void(0)">
+                                                <span class="nav-main-link-name">Link #1</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" href="javascript:void(0)">
+                                                <span class="nav-main-link-name">Link #2</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-main-heading">Extra</li>
+                                <li class="nav-main-item ml-lg-auto">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-drop"></i>
+                                        <span class="nav-main-link-name d-lg-none">Themes</span>
+                                    </a>
+                                    <ul class="nav-main-submenu nav-main-submenu-right">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="default" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-default"></i>
+                                                <span class="nav-main-link-name">Default</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-amethyst"></i>
+                                                <span class="nav-main-link-name">Amethyst</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/city.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-city"></i>
+                                                <span class="nav-main-link-name">City</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/flat.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-flat"></i>
+                                                <span class="nav-main-link-name">Flat</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/modern.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-modern"></i>
+                                                <span class="nav-main-link-name">Modern</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" href="#">
+                                                <i class="nav-main-link-icon fa fa-square text-smooth"></i>
+                                                <span class="nav-main-link-name">Smooth</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END Main Navigation -->
+                    </div>
+                </div>
+                <!-- END Navigation -->
+
+                <!-- Page Content -->
+                <div class="content">
+                    <!-- Your Block -->
+                    <div class="block block-rounded">
+                        <div class="block-header">
+                            <h3 class="block-title">
+                                Title <small>Get Started</small>
+                            </h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
+                                    <i class="si si-pin"></i>
+                                </button>
+                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                    <i class="si si-refresh"></i>
+                                </button>
+                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="close">
+                                    <i class="si si-close"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content font-size-sm">
+                            <p>
+                                Create your own awesome project!
+                            </p>
+                        </div>
+                    </div>
+                    <!-- END Your Block -->
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <footer id="page-footer" class="bg-white">
+                <div class="content py-3">
+                    <div class="row font-size-sm">
+                        <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
+                            Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
+                        </div>
+                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
+                            <a class="font-w600" href="https://1.envato.market/AVD6j" target="_blank">OneUI 4.5</a> &copy; <span data-toggle="year-copy"></span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
+
+        <!-- OneUI JS -->
+        <script src="assets/js/oneui.core.min.js"></script>
+        <script src="assets/js/oneui.app.min.js"></script>
+    </body>
+</html>
