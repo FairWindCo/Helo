@@ -27,7 +27,7 @@ class ProjectFile(models.Model):
         return f'{self.filename}({self.size})'
 
 
-class FileType:
+class FileType(models.Model):
     name: models.TextField(max_length=150, verbose_name='Название типа файла')
     mask: models.TextField(max_length=4, verbose_name='Маска для автоопределения')
 
@@ -42,7 +42,7 @@ class FileType:
         return f'{self.name}'
 
 
-class Project:
+class Project(models.Model):
     name: models.TextField(max_length=150, verbose_name='Название проекта')
     comments: models.TextField(max_length=2500, verbose_name='Описание проекта')
     created: models.DateTimeField(auto_now_add=True, verbose_name='Создан')
@@ -62,7 +62,7 @@ class Project:
         return f'{self.name}'
 
 
-class Tag:
+class Tag(models.Model):
     name: models.TextField(max_length=250, verbose_name='Метка', unique=True)
     files: models.ManyToManyField(to=ProjectFile, related_name='files_tags', null=True, blank=True)
     projects: models.ManyToManyField(to="Project", related_name='project_tags', null=True, blank=True)

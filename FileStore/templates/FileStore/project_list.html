@@ -1,0 +1,56 @@
+{% extends "mytemplates/mybacktemplate.html" %}
+{% block main-content-area-block-content %}
+    <div class="container">
+        <h1>Projects</h1>
+        <table class="table table-responsive table-dark">
+            <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Название</th>
+                <th>Исходящий канал</th>
+                <th>Входящий</th>
+                <th>Входящий канал</th>
+                <th>Длительность</th>
+                <th>Статус</th>
+                <th>Фал записи</th>
+                <th>Код последовательности</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if object_list %}
+                {% for project in object_list %}
+                    <tr>
+                        <td>
+                            {{ project.created|date }}
+                        </td>
+                        <td>
+                            {{ project.created|date }}
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tr>
+            {% else %}
+                <tr><td colspan="5">
+                <p>No projects yet.</p>
+                </td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
