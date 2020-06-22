@@ -1,3 +1,4 @@
+from dal import autocomplete
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
@@ -5,7 +6,8 @@ from django.views import View
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from FileStore.models import Project
+from FileStore.forms import ProjectForm
+from FileStore.models import Project, Tag
 
 
 class ProjectAddFormView(View):
@@ -19,7 +21,8 @@ class ProjectList(ListView):
 
 class ProjectCreate(CreateView):
     model = Project
-    fields = ['name']
+    #fields = ['name', 'comments', 'tags']
+    form_class = ProjectForm
 
 
 class ProjectUpdate(UpdateView):
@@ -30,3 +33,11 @@ class ProjectUpdate(UpdateView):
 class ProjectDelete(DeleteView):
     model = Project
     success_url = reverse_lazy('projects-list')
+
+
+class TagsAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Tag.objects.all()
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+        return qs

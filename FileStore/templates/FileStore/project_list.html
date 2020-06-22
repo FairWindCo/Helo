@@ -5,15 +5,11 @@
         <table class="table table-responsive table-dark">
             <thead>
             <tr>
-                <th>Дата</th>
                 <th>Название</th>
-                <th>Исходящий канал</th>
-                <th>Входящий</th>
-                <th>Входящий канал</th>
-                <th>Длительность</th>
-                <th>Статус</th>
-                <th>Фал записи</th>
-                <th>Код последовательности</th>
+                <th>Дата</th>
+                <th>Автор</th>
+                <th>Изменен</th>
+                <th>Изменивший</th>
             </tr>
             </thead>
             <tbody>
@@ -21,7 +17,7 @@
                 {% for project in object_list %}
                     <tr>
                         <td>
-                            {{ project.created|date }}
+                            {{ project.name}}
                         </td>
                         <td>
                             {{ project.created|date }}
