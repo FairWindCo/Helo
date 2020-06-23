@@ -1,4 +1,4 @@
-{% extends "mytemplates/mybacktemplate.html" %}
+{% extends "FileStore/main_frame.html" %}
 {% block main-content-area-block-content %}
     <div class="container">
         <h1>Projects</h1>
@@ -6,10 +6,13 @@
             <thead>
             <tr>
                 <th>Название</th>
-                <th>Дата</th>
+                <th>Создан</th>
                 <th>Автор</th>
                 <th>Изменен</th>
                 <th>Изменивший</th>
+                <th>Завершен</th>
+                <th>Количество файлов</th>
+                <th colspan="3">Действие</th>
             </tr>
             </thead>
             <tbody>
@@ -20,21 +23,30 @@
                             {{ project.name}}
                         </td>
                         <td>
-                            {{ project.created|date }}
+                            {{ project.created }}
+                        </td>
+                        <td>
+                            {{ project.create_user.username}}
+                        </td>
+                        <td>
+                            {{ project.updated }}
+                        </td>
+                        <td>
+                            {{ project.update_user.username}}
                         </td>
                         <td>
                         </td>
                         <td>
+                            {{ project.project_files.count}}
                         </td>
                         <td>
                         </td>
                         <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
+                            <a class="button btn-sm btn-info" href="{% url 'project-update' project.pk %}">Подробнее</a>
+                        </td><td>
+                            <a class="button btn-sm btn-primary" href="{% url 'project-update' project.pk %}">Изменить</a>
+                        </td><td>
+                            <a class="button btn-sm btn-danger" href="{% url 'project-delete' project.pk %}">Удалить</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -48,5 +60,8 @@
             {% endif %}
             </tbody>
         </table>
+    {% if is_paginated %}
+        {% include "_pagination.html" %}
+    {% endif %}
     </div>
 {% endblock %}

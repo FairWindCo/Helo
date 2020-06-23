@@ -1,0 +1,40 @@
+{% extends "mytemplates/mybacktemplate.html" %}
+{% block sidebar-header-logo-text %}
+    HU
+{% endblock %}
+
+{% block sidebar-content %}
+    <!-- Side Navigation -->
+    <div class="content-side content-side-full">
+        {% block sidebar-content-menu %}
+            <ul class="nav-main">
+                {% block sidebar-nav-items %}
+                    {% block sidebar-content-menu-home %}
+                        <li class="nav-main-item">
+                            <a class="nav-main-link active"
+                               href="{% block sidebar-content-menu-home-link %}gs_landing.html{% endblock %}">
+                                <i class="nav-main-link-icon si {% block sidebar-content-menu-home-css %}si-home{% endblock %}"></i>
+                                <span class="nav-main-link-name">{% block sidebar-content-menu-home-text %}
+                                    Home{% endblock %}</span>
+                            </a>
+                        </li>
+                    {% endblock %}
+
+                    {% block sidebar-content-menu-dashboard %}
+                        <li class="nav-main-item">
+                            <a class="nav-main-link active"
+                               href="{% block sidebar-content-menu-dashboard-link %}#{% endblock %}">
+                                <i class="nav-main-link-icon si si-speedometer"></i>
+                                <span class="nav-main-link-name">Dashboard</span>
+                            </a>
+                        </li>
+                    {% endblock %}
+                    {% include "FileStore/_main_menu.html" %}
+                    {% block sidebar-nav-items-addon %}
+                    {% endblock %}
+                {% endblock %}
+            </ul>
+        {% endblock %}
+    </div>
+{% endblock %}
+

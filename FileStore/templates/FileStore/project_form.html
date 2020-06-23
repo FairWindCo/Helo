@@ -1,40 +1,40 @@
-{% extends "mytemplates/mybacktemplate.html" %}
+{% extends "FileStore/main_frame.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+{% block content-header-text %}
+    Проекты
+{% endblock %}
+
+{% block main-content-area-block-header %}
+    {{ form_name }}
+{% endblock %}
+
 {% block main-content-area-block-content %}
-    <form method="post">
+    <form method="post" id="edit_form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <table style="display: none">
-            {{ view.formset.empty_form }}
-        </table>
-
-        <table>
-            {{ view.formset }}
-        </table>
-
-        <span id="add-form" class="button">Add form</span>
-
-        <input type="submit" value="Сохранить">
+        {#        {{ form.as_p }}#}
+        {% crispy form %}
+        <button id="save_btn">СОХРАНИТЬ</button>
     </form>
-    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+
+{% endblock %}
+
+{% block head %}
+    <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+{% endblock %}
+
+{% block foter_before_scipt %}
+    {{ form.media }}
     <script>
-        (function ($) {
-            $('#add-form').click(function () {
-                var index = $('#id_inline_test_models-TOTAL_FORMS').val()
-                var newTable = $('#id_inline_test_models-__prefix__-DELETE').parents('table').clone()
-                newTable.find(':input').each(function () {
-                    for (attr of ['name', 'id'])
-                        $(this).attr(
-                            attr,
-                            $(this).attr(attr).replace('__prefix__', index)
-                        )
-                })
-                newTable.insertBefore($(this))
-                $('#id_inline_test_models-TOTAL_FORMS').val(
-                    parseInt($('#id_inline_test_models-TOTAL_FORMS').val()) + 1
-                )
-                newTable.slideDown()
-            })
-        })($)
+        const myjq = jQuery.noConflict(true);
+        myjq('#save_btn').on('click', function () {
+            myjq('#edit_form').submit();
+            console.log('dsfdfds');
+        })
     </script>
+{% endblock %}
+
+{% block foter_after_scipt %}
+
 {% endblock %}

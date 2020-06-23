@@ -324,12 +324,13 @@
                     {% block header-content-right %}
                     <!-- Right Section -->
                     <div class="d-flex align-items-center">
+                    {% if user.is_authenticated %}
                         {% block header-user-menu %}
                         <!-- User Dropdown -->
                         <div class="dropdown d-inline-block ml-2">
                             <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded" src="{% block avatar-img-link-small %}{% static 'assets/media/avatars/avatar10.jpg' %}{% endblock %}" alt="Header Avatar" style="width: 18px;">
-                                <span class="d-none d-sm-inline-block ml-1">Adam</span>
+                                <span class="d-none d-sm-inline-block ml-1">{{ user.get_username }}</span>
                                 <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
@@ -429,6 +430,7 @@
                         </div>
                         <!-- END Notifications Dropdown -->
                         {% endblock %}
+                    {% endif %}
                         {% block heder-aside-btn %}
                         <!-- Toggle Side Overlay -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
@@ -555,7 +557,11 @@
         {% endblock %}
 
         <!-- OneUI JS -->
+        {% block foter_before_scipt %}
+        {% endblock %}
         <script src="{% static 'assets/js/oneui.core.min.js' %}"></script>
         <script src="{% static 'assets/js/oneui.app.min.js' %}"></script>
+        {% block foter_after_scipt %}
+        {% endblock %}
     </body>
 </html>

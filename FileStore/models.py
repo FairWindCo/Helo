@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
 # Create your models here.
+from django.urls import reverse
+
+
 class ProjectFile(models.Model):
     filename = models.CharField(max_length=100, verbose_name='Имя файла')
     size = models.PositiveIntegerField(verbose_name='Размер файла')
@@ -14,10 +16,12 @@ class ProjectFile(models.Model):
                                     verbose_name='Кто создал')
     update_user = models.ForeignKey(to=User, on_delete=models.PROTECT, related_name='modified_file',
                                     verbose_name='Кто изменил')
+    project = models.ForeignKey(to='Project', on_delete=models.CASCADE, related_name='project_files',
+                                verbose_name='Проект')
     file_path = models.FileField(verbose_name='Путь к файлу')
     file_type = models.ForeignKey(to='FileType', on_delete=models.CASCADE, blank=True, null=True, default=None)
     comments = models.TextField(max_length=1500, verbose_name='Комментарий', blank=True, null=True)
-    tags = models.ManyToManyField(to='Tag', related_name='files', blank=True)
+    tags = models.ManyToManyField(to='Tag', related_name='files', blank=True, verbose_name='Теги')
 
     class Meta:
         verbose_name = 'Файл'
@@ -54,7 +58,7 @@ class Project(models.Model):
                                     verbose_name='Кто создал')
     update_user = models.ForeignKey(to=User, on_delete=models.PROTECT, related_name='modified_projects',
                                     verbose_name='Кто изменил')
-    tags = models.ManyToManyField(to='Tag', related_name='projects', blank=True)
+    tags = models.ManyToManyField(to='Tag', related_name='projects', blank=True, verbose_name='Теги')
 
     class Meta:
         verbose_name = 'Проект'
@@ -66,6 +70,9 @@ class Project(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_absolute_url(self):
+        return reverse('project-update', kwargs={'pk': self.pk})
 
 
 class Tag(models.Model):
