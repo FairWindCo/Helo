@@ -1,0 +1,253 @@
+{% load render_table from django_tables2 %}
+<!-- Your Block -->
+<div class="block">
+    <div class="block-header">
+        <h3 class="block-title">
+            {{ content_title }}
+        </h3>
+        <div class="block-options">
+            {% if filter %}
+                <button class="btn-block-option" type="button" data-toggle="collapse" data-target="#collapseFilter"
+                        aria-expanded="false" aria-controls="collapseFilter">
+                    <i class="si si-magnifier"></i>
+                </button>
+            {% endif %}
+            <button type="button" class="btn-block-option" data-toggle="block-option"
+                    data-action="fullscreen_toggle"></button>
+            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle"
+                    data-action-mode="demo">
+                <i class="si si-refresh"></i>
+            </button>
+        </div>
+    </div>
+    <div class="block-content font-size-sm">
+        {% if filter %}
+            <div class="container collapse" id="collapseFilter">
+                <form method="get" {% if need_ajax %} onsubmit="update_data_form_ajax(this); return false;"{% endif %}>
+                    {% csrf_token %}
+                    {{ filter.form.as_p }}
+                    <button class="btn btn-primary" type="submit" data-toggle="collapse" data-target="#collapseFilter">
+                        <i class="si si-magnifier"></i>
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+    <div class="content" id="{{ ajax_divname }}">
+        {% if detail_content %}
+            {{ detail_content }}
+        {% else %}
+            {% render_table table table_template %}
+        {% endif %}
+
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="ModalDetailID">
+        <div class="modal-dialog modal-lg .modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="{{ ajax_detail_refral }}" style="overflow-y: auto; max-height: 400px;">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END Your Block -->
+{% if need_ajax %}
+<script type='text/javascript'>
+    class AJAXControl {
+        constructor(base_url, ajax_block, detail_block=undefined, csrf=undefined){
+            this.url = base_url;
+            this.table_block_id = ajax_block;
+            this.table_block = document.getElementById(ajax_block);
+            if(detail_block!==undefined){
+                this.detail_block_id = detail_block;
+                this.detail_block = document.getElementById(detail_block);
+            }
+            this.method='GET';
+            this.csrf = csrf;
+            this.description='';
+            this.title = '';
+        }
+
+        set_method(method){
+            this.method(method)
+        }
+
+        set_title(title){
+            this.title = title
+        }
+
+        set_description(description){
+            this.description = description
+        }
+
+        static form_to_search_params(searchParams, form) {
+            if (form !== undefined) {
+                let formData = new FormData(form);
+                formData.set('is_ajax', 'true');
+                for (let pair of formData.entries()) {
+                    searchParams.set(pair[0], pair[1])
+                }
+            }
+            return searchParams;
+        }
+
+
+
+        static search_to_search_params(searchParams, string_params) {
+            if (string_params !== undefined) {
+                let queryString = new URLSearchParams(string_params);
+                for (let pair of queryString.entries()) {
+                    searchParams.set(pair[0], pair[1])
+                }
+            }
+            return searchParams;
+        }
+
+        set_history(url) {
+            let query;
+            try {
+                query = new URL(url);
+            } catch (e) {
+                query = new URL(self.url);
+                AJAXControl.search_to_search_params(query.searchParams, url);
+            }
+            query.searchParams.delete('is_ajax');
+            window.history.pushState(this.description, this.title, query.toString());
+        }
+
+        ajax_url(url, form, string_params) {
+            let query;
+            try {
+                query = new URL(url);
+            } catch (e) {
+                query = new URL(this.url);
+                AJAXControl.search_to_search_params(query.searchParams, url);
+            }
+            query.searchParams.set('is_ajax', 'true');
+            let post_data = undefined
+            if(this.method ==='POST') {
+                if(form!==undefined){
+                    let formData = new FormData(form);
+                    formData.set('is_ajax', 'true');
+                    formData.set('csrfmiddlewaretoken', this.csrf);
+                    post_data = formData;
+                }
+
+            } else {
+                AJAXControl.form_to_search_params(query.searchParams, form);
+                post_data = undefined
+            }
+            AJAXControl.search_to_search_params(query.searchParams, string_params);
+            return [query, post_data]
+        }
+
+        send_ajax(url, target, prepare_link = true, post_data = undefined){
+            if(this.method === 'POST'){
+                this.send_post_ajax(url, target, prepare_link, post_data);
+            } else {
+                this.send_get_ajax(url, target, prepare_link);
+            }
+        }
+
+        send_post_ajax(url, target, prepare_link = true, post_data) {
+            fetch(url, {
+                method: 'POST',
+                body: post_data,
+            }).then(response => {
+                if (response.status === 200) {
+                    let div = target;
+                    response.text().then(text => {
+                        div.innerHTML = text;
+                        if (prepare_link) {
+                            this.prepare_links();
+                            this.set_history(url);
+                        }
+                    });
+                }
+            });
+            return false;
+        }
+
+        send_get_ajax(url, target, prepare_link = true) {
+            fetch(url, {
+                method: 'GET',
+            }).then(response => {
+                if (response.status === 200) {
+                    let div = target;
+                    response.text().then(text => {
+                        div.innerHTML = text;
+                        if (prepare_link) {
+                            this.prepare_links();
+                            this.set_history(url);
+                        }
+                    });
+                }
+            });
+            return false;
+        }
+
+
+
+        update_data_form_ajax(form) {
+            let [url, post_data] = this.ajax_url(this.url, form)
+            this.send_ajax(url, this.table_block, true, post_data);
+            return false;
+        }
+
+
+        replace_links_to_ajax(elements, target , prepare_link = true, can_modal = false) {
+            for (let x = 0; x < elements.length; x++) {
+                const links = elements[x].getElementsByTagName('A');
+                this.replace_to_ajax(links, target, prepare_link, can_modal);
+            }
+        }
+
+
+
+        replace_to_ajax(elements, target, prepare_link = true, can_modal = false) {
+            for (let x = 0; x < elements.length; x++) {
+                const btn = elements[x];
+                const self = this;
+
+                let new_querystring = btn.getAttribute('href');
+                if (can_modal) {
+                    //data-toggle="modal" data-target="#ModalDetailID"
+                    btn.setAttribute('data-toggle', 'modal');
+                    btn.setAttribute('data-target', '#ModalDetailID');
+                }
+                btn.onclick = function (e) {
+                    e.preventDefault();
+                    let [url, post_data] = self.ajax_url(new_querystring, undefined);
+                    self.send_ajax(url, target, prepare_link, post_data);
+                };
+            }
+        }
+
+
+        prepare_links() {
+            this.replace_links_to_ajax(this.table_block.getElementsByTagName('TH'), this.table_block);
+            this.replace_links_to_ajax(this.table_block.getElementsByClassName('pagination'), this.table_block);
+            this.replace_to_ajax(this.table_block.getElementsByClassName('block-btn-detail-link'), this.detail_block, false, true);
+        }
+
+    }
+    ajax_object = new AJAXControl('{{ ajax_tableurl|safe }}', '{{ ajax_divname }}', '{{ ajax_detail_refral }}', '{{ csrf_token }}')
+
+    update_data_form_ajax = ajax_object.update_data_form_ajax.bind(ajax_object);
+
+    ajax_object.prepare_links();
+
+</script>
+{% endif %}

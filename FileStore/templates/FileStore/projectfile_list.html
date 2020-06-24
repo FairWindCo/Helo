@@ -1,0 +1,30 @@
+{% extends "FileStore/main_frame.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load ajax_table %}
+
+{% block content-header-text %}
+    Файлы
+{% endblock %}
+
+{% block main-content-area-block-header %}
+    {{ form_name }}
+{% endblock %}
+
+{% block main-content-page %}
+    <div id="file_table" class="content">
+
+    </div>
+{#    {% ajax_table "file_table" "files-list-ajax" %}#}
+    {{ view_content }}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block foter_before_scipt %}
+{% endblock %}
+
+{% block foter_after_scipt %}
+{% endblock %}

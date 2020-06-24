@@ -1,0 +1,15 @@
+<div class="input-group date" id="{{ widget.datetimepicker_id }}" data-target-input="nearest" data-input>
+  <input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %} data-input>
+  <div class="input-group-append" data-target="#{{ widget.datetimepicker_id }}" data-toggle="datetimepicker">
+    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+  </div>
+</div>
+
+<script>
+    flatpickr("#{{ widget.datetimepicker_id }}", {
+        enableTime: true,
+        dateFormat: "{{ widget.format}}",
+        time_24hr: true,
+        wrap: true
+    });
+</script>

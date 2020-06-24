@@ -4,23 +4,41 @@
 
 {% block sidebar-content-menu-items %}
     <li class="nav-main-item">
-                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                    <i class="nav-main-link-icon si si-puzzle"></i>
-                                    <span class="nav-main-link-name">Проекты</span>
-                                </a>
-                                {% block sidebar-content-menu-items-sub %}
-                                     <ul class="nav-main-submenu">
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link" href="{% url 'projects-list' %}">
-                                                <span class="nav-main-link-name">Список проектов</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link" href="{% url 'project-add' %}">
-                                                <span class="nav-main-link-name">Добавить проект</span>
-                                            </a>
-                                        </li>
-                                     </ul>
-                                {% endblock %}
+        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false"
+           href="#">
+            <i class="nav-main-link-icon si si-puzzle"></i>
+            <span class="nav-main-link-name">Проекты</span>
+        </a>
+        <ul class="nav-main-submenu">
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{% url 'projects-list' %}">
+                    <span class="nav-main-link-name">Список проектов</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{% url 'project-add' %}">
+                    <span class="nav-main-link-name">Добавить проект</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-main-item">
+        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false"
+           href="#">
+            <i class="nav-main-link-icon si si-puzzle"></i>
+            <span class="nav-main-link-name">Файлы</span>
+        </a>
+        <ul class="nav-main-submenu">
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{% url 'files-list' %}">
+                    <span class="nav-main-link-name">Список файлов</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{% url 'file-add' %}">
+                    <span class="nav-main-link-name">Добавить файл</span>
+                </a>
+            </li>
+        </ul>
     </li>
 {% endblock %}

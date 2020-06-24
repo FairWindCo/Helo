@@ -1,0 +1,46 @@
+{% extends "FileStore/main_frame.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content-header-text %}
+    Проекты
+{% endblock %}
+
+{% block main-content-area-block-header %}
+    {{ form_name }}
+{% endblock %}
+
+{% block main-content-area-block-content %}
+    <form method="post" id="edit_form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {#        {{ form.as_p }}#}
+        {% crispy form %}
+        {% block form_additional %}
+        {% endblock %}
+        <input class="btn btn-sm btn-primary" id="save_btn" type="submit"/>
+        <input class="btn btn-sm btn-primary" id="reset_btn" type="reset"/>
+    </form>
+
+{% endblock %}
+
+{% block head %}
+    <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+{% endblock %}
+
+{% block foter_before_scipt %}
+    {{ form.media }}
+    <script>
+        const myjq = jQuery.noConflict(true);
+        const form=myjq('#edit_form');
+        myjq('#save_btn').on('click', function () {
+            form.trigger("submit");
+        })
+        myjq('#reset_btn').on('click', function () {
+            form.trigger("reset");
+        })
+    </script>
+{% endblock %}
+
+{% block foter_after_scipt %}
+
+{% endblock %}

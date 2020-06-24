@@ -1,3 +1,4 @@
+from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -18,7 +19,7 @@ class ProjectFile(models.Model):
                                     verbose_name='Кто изменил')
     project = models.ForeignKey(to='Project', on_delete=models.CASCADE, related_name='project_files',
                                 verbose_name='Проект')
-    file_path = models.FileField(verbose_name='Путь к файлу')
+    file_path = models.FileField(verbose_name='Путь к файлу', upload_to=MEDIA_ROOT)
     file_type = models.ForeignKey(to='FileType', on_delete=models.CASCADE, blank=True, null=True, default=None)
     comments = models.TextField(max_length=1500, verbose_name='Комментарий', blank=True, null=True)
     tags = models.ManyToManyField(to='Tag', related_name='files', blank=True, verbose_name='Теги')
@@ -32,6 +33,11 @@ class ProjectFile(models.Model):
 
     def __str__(self):
         return f'{self.filename}({self.size})'
+
+    def save(self, *args, **kwargs):
+        self.size = self.file_path.size
+        self.hash = 0
+        return models.Model.save(self, *args, **kwargs)
 
 
 class FileType(models.Model):
@@ -47,6 +53,9 @@ class FileType(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_absolute_url(self):
+        return reverse('file-update', kwargs={'pk': self.pk})
 
 
 class Project(models.Model):
