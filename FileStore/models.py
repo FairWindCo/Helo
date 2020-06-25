@@ -1,15 +1,38 @@
+import hashlib
+import os
+
 from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth.models import User
 from django.db import models
-
 # Create your models here.
 from django.urls import reverse
+
+
+def hash_calculator(file, BUF_SIZE=65536):
+    md5 = hashlib.md5()
+    with open(file, 'rb') as f:
+        while True:
+            data = f.read(BUF_SIZE)
+            if not data:
+                break
+            md5.update(data)
+    return md5.digest()
+
+
+def sha256sum(filename):
+    h = hashlib.sha256()
+    b = bytearray(128 * 1024)
+    mv = memoryview(b)
+    with open(filename, 'rb', buffering=0) as f:
+        for n in iter(lambda: f.readinto(mv), 0):
+            h.update(mv[:n])
+    return h.digest()
 
 
 class ProjectFile(models.Model):
     filename = models.CharField(max_length=100, verbose_name='Имя файла')
     size = models.PositiveIntegerField(verbose_name='Размер файла')
-    hash = models.PositiveIntegerField(verbose_name='ХешКод целостности')
+    hash = models.CharField(max_length=50, verbose_name='ХешКод целостности')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     updated = models.DateTimeField(auto_now=True, verbose_name='Изменен')
     version_before = models.ForeignKey(to='ProjectFile', on_delete=models.CASCADE, blank=True, null=True, default=None)
@@ -27,6 +50,7 @@ class ProjectFile(models.Model):
     class Meta:
         verbose_name = 'Файл'
         verbose_name_plural = 'Файлы'
+        ordering = ('filename', )
         permissions = [('can_add_projectfile', 'Может добавлять файлы проектов'),
                        ('can_del_projectfile', 'Может удалять файлы проектов'),
                        ('can_upd_projectfile', 'Может изменять файлы проектов')]
@@ -34,10 +58,49 @@ class ProjectFile(models.Model):
     def __str__(self):
         return f'{self.filename}({self.size})'
 
-    def save(self, *args, **kwargs):
-        self.size = self.file_path.size
-        self.hash = 0
-        return models.Model.save(self, *args, **kwargs)
+    def get_md5_hash(self, dont_close=False, BUF_SIZE=65536):
+        md5 = hashlib.md5()
+        try:
+            if dont_close:
+                f = self.file_path.open('rb')
+                while True:
+                    data = f.read(BUF_SIZE)
+                    if not data:
+                        break
+                    md5.update(data)
+            else:
+                with self.file_path.open('rb') as f:
+                    while True:
+                        data = f.read(BUF_SIZE)
+                        if not data:
+                            break
+                        md5.update(data)
+        except FileNotFoundError:
+            pass
+        return md5.hexdigest()
+
+    def update_hash(self):
+        self.hash = self.get_md5_hash(True)
+
+    def check_hash(self):
+        return self.hash == self.get_md5_hash()
+
+    def clean(self):
+        try:
+            self.update_hash()
+            self.size = self.file_path.size
+            file, ext = os.path.splitext(self.file_path.path)
+            if ext.startswith('.'):
+                ext=ext[1:]
+            filetype = FileType.objects.get(mask__exact=ext)
+            self.file_type = filetype
+        except FileType.DoesNotExist:
+            pass
+        except FileNotFoundError:
+            pass
+
+    def get_absolute_url(self):
+        return reverse('files-list')
 
 
 class FileType(models.Model):
@@ -46,6 +109,7 @@ class FileType(models.Model):
 
     class Meta:
         verbose_name = 'Тип файла'
+        ordering = ('name',)
         verbose_name_plural = 'Типы файлов'
         permissions = [('can_add_filetype', 'Может добавлять типы файлов'),
                        ('can_del_filetype', 'Может удалять типы файлов'),
@@ -53,9 +117,6 @@ class FileType(models.Model):
 
     def __str__(self):
         return f'{self.name}'
-
-    def get_absolute_url(self):
-        return reverse('file-update', kwargs={'pk': self.pk})
 
 
 class Project(models.Model):
@@ -72,6 +133,7 @@ class Project(models.Model):
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+        ordering = ('name',)
         permissions = [('can_add_project', 'Может добавлять проект'),
                        ('can_del_project', 'Может удалять проект'),
                        ('can_view_project', 'Может просматривать файлы проекта'),
@@ -93,6 +155,7 @@ class Tag(models.Model):
     class Meta:
         verbose_name = 'Метка'
         verbose_name_plural = 'Метки'
+        ordering = ('name', )
 
     def __str__(self):
         return f'{self.name}'

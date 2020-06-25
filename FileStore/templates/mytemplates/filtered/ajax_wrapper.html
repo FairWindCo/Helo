@@ -1,4 +1,6 @@
 {% load render_table from django_tables2 %}
+{% load crispy_forms_tags %}
+<!-- Your Block -->
 <div class="block">
     <div class="block-header">
         <h3 class="block-title">
@@ -22,10 +24,10 @@
     <div class="block-content font-size-sm">
         {% if filter %}
             <div class="container collapse" id="collapseFilter">
-                <form method="get" {% if need_ajax %} onsubmit="update_data_form_ajax(this); return false;"{% endif %}>
+                <form method="get" {% if need_ajax %} onsubmit="update_data_form_ajax(this); return false;"{% endif %} id="filter_from_data">
                     {% csrf_token %}
-                    {{ filter.form.as_p }}
-                    <button class="btn btn-primary" type="submit" data-toggle="collapse" data-target="#collapseFilter">
+                    {% crispy filter.form %}
+                    <button class="btn btn-primary" type="submit" data-toggle="collapse" data-target="#collapseFilter" id="send_filter_btn">
                         <i class="si si-magnifier"></i>
                     </button>
                 </form>
@@ -61,6 +63,7 @@
     </div>
 
 </div>
+<!-- END Your Block -->
 {% if need_ajax %}
 <script type='text/javascript'>
     class AJAXControl {
@@ -246,6 +249,13 @@
     update_data_form_ajax = ajax_object.update_data_form_ajax.bind(ajax_object);
 
     ajax_object.prepare_links();
+
+    document.getElementById('send_filter_btn').addEventListener('click', function () {
+        update_data_form_ajax(document.getElementById('filter_from_data'));
+        //document.getElementById('filter_from_data').submit();
+    })
+
+
 
 </script>
 {% endif %}

@@ -20,11 +20,19 @@
     {{ view_content }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
 
-{% block foter_before_scipt %}
+
+{% block head %}
+    <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
 {% endblock %}
 
 {% block foter_after_scipt %}
+{% if filter %}>
+    {% block foter_before_scipt %}
+            {{ filter.form.media }}
+    <script>
+        const myjq = jQuery.noConflict(true);
+    </script>
+{% endblock %}
+{% endif %}
 {% endblock %}

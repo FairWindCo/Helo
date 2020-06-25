@@ -1,7 +1,7 @@
 from dal import autocomplete
 from django.urls import path, include
 
-from FileStore.models import Tag, Project
+from FileStore.models import Tag, Project, FileType
 from FileStore.views import ProjectDelete, ProjectUpdate, ProjectCreate, ProjectList, \
     TagsAutoComplete, FileList, FileCreate, FileUpdate, ajax_projectfiles_table_view, projectfiles_table_view, \
     FileTableView
@@ -31,4 +31,8 @@ urlpatterns = [
         model=Project,
         model_field_name='name',
     ), name='auto_project'),
+    path('auto_types', autocomplete.Select2QuerySetView.as_view(
+        model=FileType,
+        model_field_name='name',
+    ), name='auto_types'),
 ]

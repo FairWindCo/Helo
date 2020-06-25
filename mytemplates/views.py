@@ -1,11 +1,10 @@
-from django.forms import model_to_dict
+from django.db import models
+from django.forms import model_to_dict, fields_for_model
 from django.middleware.csrf import get_token
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.template.loader import get_template
-from django.views.generic import DetailView
-from django.views.generic.detail import SingleObjectMixin
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin, SingleTableView
 
@@ -31,6 +30,7 @@ class DetailAjaxViewMixin(SingleTableMixin):
     use_ajax = True
     csrf_token = None
     create_filter = True
+    table_pagination={'per_page' : 5}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -56,10 +56,23 @@ class DetailAjaxViewMixin(SingleTableMixin):
             **response_kwargs
         )
 
-    def get_record_data(self, record_id):
+    def form_detail_record_info(self, record):
+        data = model_to_dict(record)
+        if isinstance(record, models.Model):
+            data['fields_meta_info'] = fields_for_model(record)
+            data['fields_meta_record'] = record
+        return data
+
+    def get_record_datas(self, record_id):
         data = self.get_table_data()
         records = data.filter(pk=record_id).all()
-        data = [model_to_dict(record) for record in records]
+        data = [self.form_detail_record_info(record) for record in records]
+        return data
+
+    def get_record_data(self, record_id):
+        data = self.get_table_data()
+        record = get_object_or_404(data, pk=record_id)
+        data = self.form_detail_record_info(record)
         return data
 
     def render_detail_record(self, record_id, is_ajax, request, *args, **kwargs):
@@ -119,7 +132,6 @@ class FilterListDetailAjaxView(DetailAjaxViewMixin, FilterView):
     def render_table_records(self, is_ajax, request, *args, **kwargs):
         if not self.create_filter:
             return DetailAjaxViewMixin.render_table_records(self, is_ajax, request, *args, **kwargs)
-
         if is_ajax:
             self.template_name = self.my_data_template
             response = FilterView.get(self, request, *args, **kwargs)

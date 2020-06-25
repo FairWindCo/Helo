@@ -10,6 +10,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormMixin
 from django_tables2 import RequestConfig
 
+from FileStore.filters import FileFilter
 from FileStore.forms import ProjectForm, FileForm
 from FileStore.models import Project, Tag, ProjectFile
 from FileStore.tables import FilesTable
@@ -89,5 +90,5 @@ class FileTableView(FilterListDetailAjaxView):
     model = ProjectFile
     table_class = FilesTable
     template_name = 'FileStore/projectfile_list.html'
-    #filterset_class = CDRFilter
-    create_filter = False
+    filterset_class = FileFilter
+    #create_filter = False
