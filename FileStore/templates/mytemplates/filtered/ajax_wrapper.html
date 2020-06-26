@@ -67,7 +67,7 @@
 {% if need_ajax %}
 <script type='text/javascript'>
     class AJAXControl {
-        constructor(base_url, ajax_block, detail_block=undefined, csrf=undefined){
+        constructor(base_url, ajax_block, detail_block=undefined, csrf=undefined, use_primary_detail_link=false){
             this.url = base_url;
             this.table_block_id = ajax_block;
             this.table_block = document.getElementById(ajax_block);
@@ -79,6 +79,7 @@
             this.csrf = csrf;
             this.description='';
             this.title = '';
+            this.use_primary_detail_link = use_primary_detail_link;
         }
 
         set_method(method){

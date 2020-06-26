@@ -1,5 +1,7 @@
 {% load my_dialogs %}
 <table>
+    {% show_object_ex detail_content %}
+--------------------------------------------------------
     {% for record in detail_content %}
         {% if 'fields_meta_info' in record %}
             {% for key,value in record.items %}

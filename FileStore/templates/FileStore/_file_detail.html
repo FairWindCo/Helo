@@ -1,0 +1,47 @@
+{% load my_dialogs %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="row">Название</th>
+      <td>{{ object.filename }}</td>
+      <th scope="row">Размер файла</th>
+      <td>{{ object.size|filesizeformat }}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    </tr>
+    <tr>
+      <th scope="row">Создан</th>
+      <td>{{ object.created }}</td>
+      <th scope="row">Автор</th>
+      <td>{{ object.create_user }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Имзенен</th>
+      <td>{{ object.updated }}</td>
+      <th scope="row">Редактор</th>
+      <td>{{ object.update_user }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Коментарий</th>
+      <td colspan="3">{{ object.comments }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Тип файла</th>
+      <td>{% get_items object 'file_type' 'name' default='----' %}</td>
+      <th scope="row">Проект</th>
+      <td>{% get_items object 'project' 'name' %}</td>
+    </tr>
+    <tr>
+      <th scope="row">Теги</th>
+      <td colspan="3"><ul>
+          {% for tag in object.tags.all %}
+              <li>{{ tag.name }}</li>
+          {% endfor %}
+      </ul></td>
+
+    </tr>
+
+  </tbody>
+</table>

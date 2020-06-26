@@ -89,10 +89,16 @@ class ProjectFile(models.Model):
         try:
             self.update_hash()
             self.size = self.file_path.size
+
+            filepath, filename = os.path.split(self.file_path.name)
+            if not filepath:
+                self.file_path.name = f'{self.project.id}/{self.file_path.name}'
+
             file, ext = os.path.splitext(self.file_path.path)
             if ext.startswith('.'):
                 ext=ext[1:]
             filetype = FileType.objects.get(mask__exact=ext)
+            print(file)
             self.file_type = filetype
         except FileType.DoesNotExist:
             pass

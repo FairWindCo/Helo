@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 # Create your views here.
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormMixin
 from django_tables2 import RequestConfig
 
@@ -72,6 +72,13 @@ class ProjectList(ListView):
     model = Project
 
 
+class ProjectDetail(DetailView):
+    model = Project
+
+class ProjectFileDetail(DetailView):
+    model = ProjectFile
+
+
 class FileList(ListView):
     model = ProjectFile
 
@@ -91,4 +98,5 @@ class FileTableView(FilterListDetailAjaxView):
     table_class = FilesTable
     template_name = 'FileStore/projectfile_list.html'
     filterset_class = FileFilter
-    #create_filter = False
+    use_special_url_for_detail = 'file-detail-ajax'
+    # create_filter = False

@@ -26,19 +26,23 @@ class DetailAjaxViewMixin(SingleTableMixin):
     my_detail_data_template = 'mytemplates/filtered/ajax_detail_content.html'
     my_template = 'mytemplates/filtered/ajax_wrapper.html'
     my_data_template = 'mytemplates/filtered/ajax_content.html'
+    use_special_url_for_detail = None
     default_template = True
     use_ajax = True
     csrf_token = None
     create_filter = True
-    table_pagination={'per_page' : 5}
+    table_pagination = {'per_page': 5}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if 'table' in context:
+            setattr(context['table'], 'use_special_url_for_detail', self.use_special_url_for_detail)
         context['ajax_divname'] = self.ajax_refral
         context['ajax_tableurl'] = self.my_absolute_url
         context['ajax_detail_refral'] = self.ajax_detail_refral
         context['need_ajax'] = self.use_ajax
         context['csrf_token'] = self.csrf_token
+        context['use_special_url_for_detail'] = self.use_special_url_for_detail
         if self.default_template:
             context['table_template'] = self.my_table_template
         return context
@@ -72,8 +76,8 @@ class DetailAjaxViewMixin(SingleTableMixin):
     def get_record_data(self, record_id):
         data = self.get_table_data()
         record = get_object_or_404(data, pk=record_id)
-        data = self.form_detail_record_info(record)
-        return data
+        # data = self.form_detail_record_info(record)
+        return record
 
     def render_detail_record(self, record_id, is_ajax, request, *args, **kwargs):
         data = self.get_record_data(record_id)

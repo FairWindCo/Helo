@@ -1,5 +1,6 @@
 {% load django_tables2 %}
 {% load i18n %}
+{% load my_dialogs %}
 {% block table-wrapper %}
 <div class="table-container">
     {% block table %}
@@ -30,9 +31,15 @@
                             <td {{ column.attrs.td.as_html }}>{% if column.localize == None %}{{ cell }}{% else %}{% if column.localize %}{{ cell|localize }}{% else %}{{ cell|unlocalize }}{% endif %}{% endif %}</td>
                         {% endfor %}
                         <td>
+                            {% if table.use_special_url_for_detail %}
+                            <a class="btn btn-primary block-btn-detail-link" type="button" data-id="{{ row.record.pk }}" href="{% abs_url table.use_special_url_for_detail row.record.pk %}" target="_blank">
+                                <i class="si si-book-open"></i>
+                            </a>
+                            {% else %}
                             <a class="btn btn-primary block-btn-detail-link" type="button" data-id="{{ row.record.pk }}" href="?record_id={{ row.record.pk }}" target="_blank">
                                 <i class="si si-book-open"></i>
                             </a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endblock table.tbody.row %}

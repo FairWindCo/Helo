@@ -1,20 +1,2 @@
 {% load my_dialogs %}
-<table>
-        {% if 'fields_meta_info' in detail_content %}
-            {% for key,value in detail_content.items %}
-                {% if key != 'fields_meta_info' %}
-                    <tr>
-                        <td>{{ detail_content.fields_meta_info|get_item:key|get_item:'label' }}</td>
-                        <td>{% show_dict_sub detail_content key 'label' %}{{ detail_content|get_item:key }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            {% for key,value in detail_content.items %}
-                    <tr>
-                        <td>{{ key }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
-            {% endfor %}
-        {% endif %}
-</table>
+    {% show_object_ex detail_content empty_value='----' %}

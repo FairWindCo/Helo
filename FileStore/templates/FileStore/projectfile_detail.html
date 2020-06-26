@@ -1,0 +1,17 @@
+{% extends "FileStore/main_frame.html" %}
+
+{% load static %}
+
+
+{% block content-header-text %}
+    Файл
+{% endblock %}
+
+{% block main-content-area-block-header %}
+    {{ form_name }}
+{% endblock %}
+
+{% block main-content-page %}
+    {% include 'FileStore/_file_detail.html' %}
+{% endblock %}
+

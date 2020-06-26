@@ -1,0 +1,46 @@
+update `modx_site_content` set `class_key` = 'msCategory'
+WHERE `template` in (5, 4, 2)
+
+
+
+update `modx_site_content` set `class_key` = 'msProduct'
+WHERE `template` in (3)
+
+
+insert into `modx_ms2_products` (`id`) select id from `modx_site_content` WHERE `template` in (3)
+
+
+
+UPDATE modx_ms2_products p 
+INNER JOIN modx_site_tmplvar_contentvalues as cntvar ON p.id = cntvar.contentid and cntvar.tmplvarid=5
+SET p.article = cntvar.value
+
+
+
+	insert into `modx_ms2_product_files` (`product_id`, `file`, `type`) select 
+	select p.id, cntvar.value, 'image' from modx_ms2_products p 
+	INNER JOIN modx_site_tmplvar_contentvalues as cntvar ON p.id = cntvar.contentid and cntvar.tmplvarid=3
+
+TV поля код продукта:
+(в таблицу ) modx_site_tmplvars 
+productnumber id = 5 
+
+
+
+SELECT * FROM `modx_ms2_product_files`
+
+modx_site_tmplvar_contentvalues
+
+
+select p.id, p.article, cntvar.value from modx_ms2_products p INNER JOIN modx_site_tmplvar_contentvalues cntvar ON p.id = cntva.contentid and tmplvarid=5 
+
+UPDATE tableA a
+INNER JOIN tableB b ON a.name_a = b.name_b
+SET validation_check = if(start_dts > end_dts, 'VALID', '')
+
+
+
+
+select p.id, p.article, cntvar.value
+from modx_ms2_products p 
+INNER JOIN modx_site_tmplvar_contentvalues as cntvar ON p.id = cntvar.contentid and cntvar.tmplvarid=5
