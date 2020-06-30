@@ -17,8 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 import FileStore
+from FileStore.views import TestBaseDatatableView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('', include('FileStore.urls')),
+    path('test_jtable', TestBaseDatatableView.as_view()),
 ]

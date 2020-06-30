@@ -14,6 +14,7 @@ from FileStore.filters import FileFilter
 from FileStore.forms import ProjectForm, FileForm
 from FileStore.models import Project, Tag, ProjectFile
 from FileStore.tables import FilesTable
+from Jtable.views import BaseDatatableView
 from mytemplates.views import FilterListDetailAjaxView
 
 
@@ -75,6 +76,7 @@ class ProjectList(ListView):
 class ProjectDetail(DetailView):
     model = Project
 
+
 class ProjectFileDetail(DetailView):
     model = ProjectFile
 
@@ -100,3 +102,7 @@ class FileTableView(FilterListDetailAjaxView):
     filterset_class = FileFilter
     use_special_url_for_detail = 'file-detail-ajax'
     # create_filter = False
+
+
+class TestBaseDatatableView(BaseDatatableView):
+    model = Tag
