@@ -63,5 +63,8 @@
     {% if is_paginated %}
         {% include "_pagination.html" %}
     {% endif %}
+        <div>
+            <a class="btn btn-sm btn-info" href="{% url 'project-add' %}">Добавить проект</a>
+        </div>
     </div>
 {% endblock %}

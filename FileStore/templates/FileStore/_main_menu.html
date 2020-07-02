@@ -4,9 +4,15 @@
 
 {% block sidebar-content-menu-items %}
     <li class="nav-main-item">
+        <a class="nav-main-link" href="{% url 'search_files' %}">
+            <i class="nav-main-link-icon si si-support"></i>
+            <span class="nav-main-link-name">Поиск файлов</span>
+        </a>
+    </li>
+    <li class="nav-main-item">
         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false"
            href="#">
-            <i class="nav-main-link-icon si si-puzzle"></i>
+            <i class="nav-main-link-icon si si-folder"></i>
             <span class="nav-main-link-name">Проекты</span>
         </a>
         <ul class="nav-main-submenu">

@@ -3,7 +3,7 @@
   <thead>
     <tr>
       <th scope="row">Название</th>
-      <td>{{ object.filename }}</td>
+      <td><a class="btn-info btn btn-sm" href="{% url 'download' object.pk %}">{{ object.filename }}</a></td>
       <th scope="row">Размер файла</th>
       <td>{{ object.size|filesizeformat }}</td>
     </tr>
@@ -13,13 +13,13 @@
     </tr>
     <tr>
       <th scope="row">Создан</th>
-      <td>{{ object.created }}</td>
+      <td>{{ object.created|date:"d.m.Y H:i:s" }}</td>
       <th scope="row">Автор</th>
       <td>{{ object.create_user }}</td>
     </tr>
     <tr>
       <th scope="row">Имзенен</th>
-      <td>{{ object.updated }}</td>
+      <td>{{ object.updated|date:"d.m.Y H:i:s" }}</td>
       <th scope="row">Редактор</th>
       <td>{{ object.update_user }}</td>
     </tr>

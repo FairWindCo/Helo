@@ -14,10 +14,12 @@
 
 {% block main-content-page %}
     <div id="file_table" class="content">
-
+        {#    {% ajax_table "file_table" "files-list-ajax" %}#}
+        {{ view_content }}
+        <div>
+            <a class="btn btn-sm btn-info" href="{% url 'file-add' %}">Добавить файл</a>
+        </div>
     </div>
-{#    {% ajax_table "file_table" "files-list-ajax" %}#}
-    {{ view_content }}
 {% endblock %}
 
 
@@ -27,12 +29,12 @@
 {% endblock %}
 
 {% block foter_after_scipt %}
-{% if filter %}>
-    {% block foter_before_scipt %}
+    {% if filter %}>
+        {% block foter_before_scipt %}
             {{ filter.form.media }}
-    <script>
-        const myjq = jQuery.noConflict(true);
-    </script>
-{% endblock %}
-{% endif %}
+            <script>
+                const myjq = jQuery.noConflict(true);
+            </script>
+        {% endblock %}
+    {% endif %}
 {% endblock %}

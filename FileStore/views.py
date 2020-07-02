@@ -1,8 +1,8 @@
 from dal import autocomplete
 from django import http
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 # Create your views here.
@@ -10,12 +10,13 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormMixin
 from django_tables2 import RequestConfig
 
-from FileStore.filters import FileFilter
+from FileStore.filters import FileFilter, FileCompleteFilter
 from FileStore.forms import ProjectForm, FileForm
 from FileStore.models import Project, Tag, ProjectFile
 from FileStore.tables import FilesTable
 from Jtable.views import BaseDatatableView
 from mytemplates.views import FilterListDetailAjaxView
+from streaming.streaming import stream_video
 
 
 class AutoLoggingOperationMixin(FormMixin):
@@ -104,5 +105,24 @@ class FileTableView(FilterListDetailAjaxView):
     # create_filter = False
 
 
+class FileSearchTableView(FilterListDetailAjaxView):
+    model = ProjectFile
+    table_class = FilesTable
+    template_name = 'FileStore/projectfile_list.html'
+    filterset_class = FileCompleteFilter
+    use_special_url_for_detail = 'file-detail-ajax'
+    # create_filter = False
+
+
 class TestBaseDatatableView(BaseDatatableView):
     model = Tag
+
+
+def get_file(request, pk):
+    file = get_object_or_404(ProjectFile, pk=pk)
+    if file:
+        return stream_video(request, file.file_path.path)
+    else:
+        return HttpResponseForbidden()
+
+

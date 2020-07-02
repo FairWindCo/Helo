@@ -24,8 +24,6 @@ class LazyEncoder(DjangoJSONEncoder):
 
 
 class JSONJTableResponseMixin(object):
-    is_clean = False
-
     def render_to_response(self, context):
         """ Returns a JSON response containing 'context' as payload
         """
@@ -48,19 +46,15 @@ class JSONJTableResponseMixin(object):
         response = {}
         try:
             func_val = self.get_context_data(**kwargs)
-            if not self.is_clean:
-                assert isinstance(func_val, dict)
-                response = dict(func_val)
-                if 'error' not in response and 'sError' not in response:
-                    response['Result'] = 'OK'
-                else:
-                    response['Result'] = 'ERROR'
+            assert isinstance(func_val, dict)
+            response = dict(func_val)
+            if 'error' not in response and 'sError' not in response:
+                response['Result'] = 'OK'
+            else:
+                response['Result'] = 'ERROR'
         except Exception as e:
             response['Result'] = 'ERROR'
             response['Message'] = str(e)
-
-        else:
-            response = func_val
 
         dump = json.dumps(response, cls=LazyEncoder)
         return self.render_to_response(dump)

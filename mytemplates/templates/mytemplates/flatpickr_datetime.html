@@ -7,9 +7,9 @@
 
 <script>
     flatpickr("#{{ widget.datetimepicker_id }}", {
-        enableTime: true,
+        enableTime: {% if widget.show_time %}true{% else %}false{% endif %},
         dateFormat: "{{ widget.format}}",
-        time_24hr: true,
+        time_24hr: {% if widget.show_24 %}true{% else %}false{% endif %},
         wrap: true
     });
 </script>
