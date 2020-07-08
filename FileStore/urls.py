@@ -4,13 +4,15 @@ from django.urls import path, include
 from FileStore.models import Tag, Project, FileType
 from FileStore.views import ProjectDelete, ProjectUpdate, ProjectCreate, ProjectList, \
     TagsAutoComplete, FileList, FileCreate, FileUpdate, ajax_projectfiles_table_view, projectfiles_table_view, \
-    FileTableView, ProjectFileDetail, get_file, FileSearchTableView
+    FileTableView, ProjectFileDetail, get_file, FileSearchTableView, ajax_project_files_view, projects_views
 
 urlpatterns = [
     path('project/add/', ProjectCreate.as_view(), name='project-add'),
     path('project/<int:pk>/', ProjectUpdate.as_view(), name='project-update'),
     path('project/<int:pk>/delete/', ProjectDelete.as_view(), name='project-delete'),
     path('projects/', ProjectList.as_view(), name='projects-list'),
+    path('projects_/', projects_views, name='projects-list_'),
+
 
     path('file/add/', FileCreate.as_view(), name='file-add'),
     path('file/<int:pk>/update', FileUpdate.as_view(), name='file-update'),
@@ -25,6 +27,8 @@ urlpatterns = [
 
 
     path('files-ajax/', ajax_projectfiles_table_view, name='files-list-ajax'),
+    path('project-file-ajax/<int:id>', ajax_project_files_view, name='project-file-ajax'),
+
 
     path('autocomlete_tags', TagsAutoComplete.as_view(), name='autocomlete_tags'),
     path('auto_tags', autocomplete.Select2QuerySetView.as_view(

@@ -1,0 +1,45 @@
+    function jtable_post_action(url) {
+        return function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                var token = '{{csrf_token}}';
+                murl = '';
+                if(jtParams.jtStartIndex !== undefined){
+                    if(murl===''){
+                        murl+='?'
+                    } else{
+
+                    }
+                    murl+='jtStartIndex=' + jtParams.jtStartIndex
+                }
+                if(jtParams.jtPageSize !== undefined){
+                    if(murl===''){
+                        murl+='?'
+                    } else{
+                        murl+='&'
+                    }
+                    murl+='jtPageSize=' + jtParams.jtPageSize
+                }
+                if(jtParams.jtSorting !== undefined){
+                    if(murl===''){
+                        murl+='?'
+                    } else{
+                        murl+='&'
+                    }
+                    murl+='jtSorting=' + jtParams.jtSorting
+                }
+                $.ajax({
+                    url: url + murl,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    headers: { "X-CSRFToken": token },
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function () {
+                        $dfd.reject();
+                    }
+                });
+            });
+        }
+    }

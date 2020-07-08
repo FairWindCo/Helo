@@ -13,8 +13,8 @@ from django_tables2 import RequestConfig
 from FileStore.filters import FileFilter, FileCompleteFilter
 from FileStore.forms import ProjectForm, FileForm
 from FileStore.models import Project, Tag, ProjectFile
-from FileStore.tables import FilesTable
-from Jtable.views import BaseDatatableView
+from FileStore.tables import FilesTable, FilesShortTable
+from Jtable.views import BaseJTableDatatableView
 from mytemplates.views import FilterListDetailAjaxView
 from streaming.streaming import stream_video
 
@@ -96,6 +96,12 @@ def ajax_projectfiles_table_view(request):
     return HttpResponse(simple_table.as_html(request))
 
 
+def ajax_project_files_view(request, id):
+    simple_table = FilesShortTable(ProjectFile.objects.filter(project=id, version_before=None).all())
+    RequestConfig(request).configure(simple_table)
+    return HttpResponse(simple_table.as_html(request))
+
+
 class FileTableView(FilterListDetailAjaxView):
     model = ProjectFile
     table_class = FilesTable
@@ -114,8 +120,11 @@ class FileSearchTableView(FilterListDetailAjaxView):
     # create_filter = False
 
 
-class TestBaseDatatableView(BaseDatatableView):
+class TagBaseDatatableView(BaseJTableDatatableView):
     model = Tag
+
+class ProjectBaseDatatableView(BaseJTableDatatableView):
+    model = Project
 
 
 def get_file(request, pk):
@@ -126,4 +135,5 @@ def get_file(request, pk):
         return HttpResponseForbidden()
 
 
-
+def projects_views(request):
+    return render(request, 'FileStore/projects.html')

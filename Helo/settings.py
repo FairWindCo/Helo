@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'FileStore',
     #'django_autocomplete_light',
-    'mytemplates'
+    'mytemplates',
+    'Jtable'
 ]
 
 MIDDLEWARE = [

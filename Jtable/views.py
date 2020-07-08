@@ -106,7 +106,7 @@ class JTableMixin(object):
 
         return getattr(obj, key, None)
 
-    def _render_column(self, row, column):
+    def _render_column(self, row, column, result_object=None):
         """ Renders a column on a row. column can be given in a module notation eg. document.invoice.type
         """
         # try to find rightmost object
@@ -133,13 +133,16 @@ class JTableMixin(object):
 
             if self.escape_values:
                 value = escape(value)
+        if result_object is not None:
+            result_object[column] = value
+            return result_object
+        else:
+            return {column: value}
 
-        return {column: value}
-
-    def render_column(self, row, column):
+    def render_column(self, row, column, result=None):
         """ Renders a column on a row. column can be given in a module notation eg. document.invoice.type
         """
-        value = self._render_column(row, column)
+        value = self._render_column(row, column, result)
         if value and hasattr(row, 'get_absolute_url'):
             return format_html('<a href="{}">{}</a>', row.get_absolute_url(), value)
         return value
@@ -213,6 +216,15 @@ class JTableMixin(object):
     def prepare_results(self, qs):
         data = []
         for item in qs:
+            element = {}
+            for column in self._columns:
+                self.render_column(item, column, element)
+            data.append(element)
+        return data
+
+    def prepare_results_ex(self, qs):
+        data = []
+        for item in qs:
             data.append([self.render_column(item, column) for column in self._columns])
         return data
 
@@ -263,5 +275,5 @@ class JTableMixin(object):
             return self.handle_exception(e)
 
 
-class BaseDatatableView(JTableMixin, JSONJTableResponseView):
+class BaseJTableDatatableView(JTableMixin, JSONJTableResponseView):
     pass

@@ -1,0 +1,50 @@
+{% extends "FileStore/main_frame.html" %}
+{% load static %}
+{% block main-content-area-block-content %}
+    <div id="jtable_projects_list_frame">
+
+    </div>
+{% endblock %}
+
+{% block head %}
+    <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'assets/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'jtable/jquery.jtable.min.js' %}"></script>
+    <script src="{% static 'jtable/localization/jquery.jtable.ru.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'assets/jquery-ui.min.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'jtable/themes/basic/jtable_basic.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'jtable/themes/metro/jtable_metro_base.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'jtable/themes/metro/blue/jtable.min.css' %}"/>
+{% endblock %}
+
+{% block foter_after_scipt %}
+    {% if filter %}>
+        {% block foter_before_scipt %}
+            <script>
+                const myjq = jQuery.noConflict(true);
+                myjq(document).ready(function ($) {
+                    console.log('Test');
+
+                    {% include 'Jtable/jtable_scripting.html' %}
+
+                    $('#jtable_projects_list_frame').jtable({
+                        title: 'Список проектов',
+                        actions: {
+                            listAction: jtable_post_action('{% url 'test_jtable' %}'),
+                        },
+                        fields: {
+                            id: {
+                                key: true,
+                                list: false
+                            },
+                            name: {
+                                title: 'Название проекта',
+                                width: '40%'
+                            },
+                        }
+                    }).jtable('load');
+                });
+            </script>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
