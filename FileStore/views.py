@@ -108,7 +108,25 @@ class FileTableView(FilterListDetailAjaxView):
     template_name = 'FileStore/projectfile_list.html'
     filterset_class = FileFilter
     use_special_url_for_detail = 'file-detail-ajax'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._extra_key = None
+
     # create_filter = False
+
+    def get_table_data(self):
+        print(self.request)
+        if self._extra_key:
+            return self.model.objects.filter(project=self._extra_key)
+        else:
+            return super().get_table_data()
+
+    def get(self, request, *args, **kwargs):
+        self._extra_key = kwargs.get('prj', None)
+        return super().get(request, *args, **kwargs)
+
+
 
 
 class FileSearchTableView(FilterListDetailAjaxView):
@@ -123,8 +141,10 @@ class FileSearchTableView(FilterListDetailAjaxView):
 class TagBaseDatatableView(BaseJTableDatatableView):
     model = Tag
 
+
 class ProjectBaseDatatableView(BaseJTableDatatableView):
     model = Project
+
 
 
 def get_file(request, pk):

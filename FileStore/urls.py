@@ -20,6 +20,7 @@ urlpatterns = [
     #path('files/', FileList.as_view(), name='files-list'),
     #path('files/', projectfiles_table_view, name='files-list'),
     path('files/', FileTableView.as_view(), name='files-list'),
+    path('files_/<int:prj>', FileTableView.as_view(), name='files-list2'),
     path('file/<int:pk>', ProjectFileDetail.as_view(), name='file-detail'),
     path('download/<int:pk>', get_file, name='download'),
     path('file/<int:pk>/ajax', ProjectFileDetail.as_view(template_name='FileStore/_file_detail.html'), name='file-detail-ajax'),

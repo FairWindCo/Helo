@@ -32,11 +32,11 @@
                         {% endfor %}
                         <td>
                             {% if table.use_special_url_for_detail %}
-                            <a class="btn btn-primary block-btn-detail-link" type="button" data-id="{{ row.record.pk }}" href="{% abs_url table.use_special_url_for_detail row.record.pk %}" target="_blank">
+                            <a class="btn btn-primary block-btn-detail-link" type="button" data-id="{{ row.record.pk }}" href="{% abs_url table.use_special_url_for_detail row.record.pk %}" target="_blank" data-open-modal="true">
                                 <i class="si si-book-open"></i>
                             </a>
                             {% else %}
-                            <a class="btn btn-primary block-btn-detail-link" type="button" data-id="{{ row.record.pk }}" href="?record_id={{ row.record.pk }}" target="_blank">
+                            <a class="btn btn-primary block-btn-detail-link" type="button" data-id="{{ row.record.pk }}" href="?record_id={{ row.record.pk }}" target="_blank" data-open-modal="true">
                                 <i class="si si-book-open"></i>
                             </a>
                             {% endif %}

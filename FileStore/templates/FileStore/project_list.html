@@ -1,5 +1,7 @@
 {% extends "FileStore/main_frame.html" %}
+{% load static %}
 {% block main-content-area-block-content %}
+    <script src="{% static '/assets/js/ajax_communicator.js' %}"></script>
     <div class="container">
         <h1>Projects</h1>
         <table class="table table-responsive table-dark">
@@ -20,32 +22,35 @@
                 {% for project in object_list %}
                     <tr>
                         <td>
-                            {{ project.name}}
+                            {{ project.name }}
                         </td>
                         <td>
                             {{ project.created }}
                         </td>
                         <td>
-                            {{ project.create_user.username}}
+                            {{ project.create_user.username }}
                         </td>
                         <td>
                             {{ project.updated }}
                         </td>
                         <td>
-                            {{ project.update_user.username}}
+                            {{ project.update_user.username }}
                         </td>
                         <td>
                         </td>
                         <td>
-                            {{ project.project_files.count}}
+                            {{ project.project_files.count }}
                         </td>
                         <td>
                         </td>
                         <td>
-                            <a class="button btn-sm btn-info" href="{% url 'project-update' project.pk %}">Подробнее</a>
-                        </td><td>
-                            <a class="button btn-sm btn-primary" href="{% url 'project-update' project.pk %}">Изменить</a>
-                        </td><td>
+                            <a class="button btn-sm btn-info" href="{%  url 'files-list2' project.pk %}" onclick="click_create_sub_row(this, 'GET', 'ModalProjectDetailID', 'ModalProjectDetailIDContent'); return false;">Подробнее</a>
+                        </td>
+                        <td>
+                            <a class="button btn-sm btn-primary"
+                               href="{% url 'project-update' project.pk %}">Изменить</a>
+                        </td>
+                        <td>
                             <a class="button btn-sm btn-danger" href="{% url 'project-delete' project.pk %}">Удалить</a>
                         </td>
                     </tr>
@@ -53,22 +58,24 @@
 
                 </tr>
             {% else %}
-                <tr><td colspan="5">
-                <p>No projects yet.</p>
-                </td>
+                <tr>
+                    <td colspan="5">
+                        <p>No projects yet.</p>
+                    </td>
                 </tr>
             {% endif %}
             </tbody>
         </table>
-    {% if is_paginated %}
-        {% include "_pagination.html" %}
-    {% endif %}
+        {% if is_paginated %}
+            {% include "_pagination.html" %}
+        {% endif %}
         <div>
             <a class="btn btn-sm btn-info" href="{% url 'project-add' %}">Добавить проект</a>
         </div>
     </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="ModalProjectDetailID">
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="ModalProjectDetailID">
         <div class="modal-dialog modal-lg .modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -77,7 +84,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" style="overflow-y: auto; max-height: 400px;">
+                <div class="modal-body" style="overflow-y: auto; max-height: 400px;" id="ModalProjectDetailIDContent">
 
                 </div>
                 <div class="modal-footer">
@@ -85,5 +92,5 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 {% endblock %}
