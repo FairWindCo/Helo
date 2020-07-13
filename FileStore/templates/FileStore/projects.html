@@ -31,6 +31,8 @@
                         title: 'Список проектов',
                         actions: {
                             listAction: jtable_post_action('{% url 'test_jtable' %}'),
+                            updateAction: jtable_post_action('{% url 'test_jtable' %}'),
+                            createAction: jtable_post_action('{% url 'test_jtable' %}'),
                         },
                         fields: {
                             id: {
@@ -39,7 +41,15 @@
                             },
                             name: {
                                 title: 'Название проекта',
-                                width: '40%'
+                                width: '40%',
+                                input: function (data) {
+                                    if (data.record) {
+                                        console.log(data.record)
+                                        return '<input type="text" name="Name" style="width:200px" value="' + data.record.name + '" />';
+                                    } else {
+                                        return '<input type="text" name="Name" style="width:200px" value="enter your name here" />';
+                                    }
+                                },
                             },
                         }
                     }).jtable('load');

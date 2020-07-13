@@ -28,13 +28,21 @@ function click_create_sub_row(event, method = 'POST', modal_target = undefined, 
     let [element, show_state] = create_sub_row(event);
     if (event.href) {
         if (show_state) {
-            const processor = new AJAXSubFrame(event.href, element, modal_target_content, modal_target, method, false);
-            AJAXSubFrame.send_ajax_and_process(event.href, undefined, undefined, undefined, method, function (url, text, ...args) {
-                if (element) {
-                    element.innerHTML = text;
-                    processor.replace_links_to_ajax(element);
-                }
-            })
+            if(element['processor']!==undefined){
+               element['processor'].do_reload();
+            } else {
+                const processor = new AJAXSubFrame(event.href, element, modal_target_content, modal_target, method, false);
+                element['processor'] = processor;
+                processor.do_ajax(event.href, element, undefined, method, modal_target);
+                const button = document.createElement('button');
+                button.addEventListener('click', processor.do_reload.bind(processor));
+                const i = document.createElement('i');
+                i.setAttribute('class', 'si si-refresh');
+                button.setAttribute('class', 'btn btn-primary');
+                button.append(i);
+                const sub_control = element.parentElement.getElementsByTagName('div')[1];
+                sub_control.append(button);
+            }
         }
         return false;
     } else {
@@ -58,15 +66,20 @@ function create_sub_row(currentElement) {
             const id = makeid(10);
             let sub_row = document.createElement('tr');
             let sub_td = document.createElement('td');
+            let sub_div1 = document.createElement('div');
+            let sub_div2 = document.createElement('div');
+            sub_row.setAttribute('class', 'ajax_sub_row')
             sub_td.colSpan = tr.childElementCount;
             sub_td.id = id;
             sub_row.append(sub_td);
+            sub_td.append(sub_div1);
+            sub_td.append(sub_div2);
             currentElement['sub_element'] = sub_td;
             currentElement['sub_element_id'] = id;
 
             insertAfter(tr, sub_row);
             //sub_row.style.display = 'none';
-            return [sub_td, true];
+            return [sub_div1, true];
         } else {
             return [undefined, false];
         }
@@ -76,6 +89,7 @@ function create_sub_row(currentElement) {
 
 class AJAXSubFrame {
     constructor(base_url, target, modal_target, modal_dialog, method = 'GET', save_to_history = false) {
+        console.log('CREATE AJAX PROCESSOR FOR '+base_url)
         this.base_url = base_url;
         this.modal_target_content = modal_target;
         this.modal_dialog = modal_dialog;
@@ -86,6 +100,7 @@ class AJAXSubFrame {
         this.save_ajax_to_history = save_to_history
         this.replace_links_to_ajax = this.replace_links_to_ajax.bind(this);
         this.post_processor = this.post_processor.bind(this);
+        this.last_data_load = undefined
     }
 
     set_method(method) {
@@ -140,6 +155,12 @@ class AJAXSubFrame {
         window.history.pushState(this.description, this.title, query.toString());
     }
 
+    do_reload(){
+        if(this.last_data_load!==undefined){
+            this.last_data_load();
+        }
+    }
+
     static send_ajax_and_process(url, string_params = undefined, form = undefined, post_data = {}, method = 'POST', post_process = (url, text, ...args) => text, headers = {}, ...args) {
         let [new_url, form_data] = AJAXSubFrame.ajax_url(url, form, string_params, method)
         const csrf = Cookies.get('csrftoken');
@@ -165,21 +186,10 @@ class AJAXSubFrame {
         return false;
     }
 
-    static send_ajax_request(url, target, post_data = {}, method = 'POST', post_process = (url, text, ...args) => text, headers = {}, ...args) {
-        return AJAXSubFrame.send_ajax_and_process(url, undefined, undefined, post_data, method, (u, t, ...a) => {
-            let div = target;
-            if (target === undefined) {
-                div = document.getElementsByTagName('body')
-            }
-            if (post_process !== undefined) {
-                div.innerHTML = post_process(u, t, ...a);
-            } else {
-                div.innerHTML = text;
-            }
-        }, headers, ...args);
-    }
-
     do_ajax(url, target, post_data = {}, method = 'POST') {
+        const self=this;
+        this.last_data_load = () => self.do_ajax(url, target, post_data, method);
+
         return AJAXSubFrame.send_ajax_and_process(url, undefined, undefined, post_data, method, (u, t, ...a) => {
             let div = target;
             if (typeof (target) == 'string') {
@@ -254,6 +264,8 @@ class AJAXSubFrame {
             const self = this;
             const new_querystring = btn.getAttribute('href');
             const open_modal = btn.getAttribute('data-open-modal');
+            const data_modify_link = btn.getAttribute('data-modify-link')!=='false';
+            console.log(data_modify_link, btn.getAttribute('data-modify-link'));
             let target = self.target;
             if (open_modal) {
                 btn.setAttribute('data-toggle', 'modal');
@@ -262,31 +274,13 @@ class AJAXSubFrame {
                 const modal_content = typeof (self.modal_target_content) == 'string' ? document.getElementById(self.modal_target_content):self.modal_target_content;
                 target = modal_content;
             }
-            btn.onclick = function (e) {
-                e.preventDefault();
-                let [url, post_data] = AJAXSubFrame.ajax_url(new_querystring, undefined, undefined, self.method, self.base_url);
-                self.do_ajax(url, target, post_data, self.method, self.post_processor);
+            if(data_modify_link) {
+                btn.onclick = function (e) {
+                    e.preventDefault();
+                    let [url, post_data] = AJAXSubFrame.ajax_url(new_querystring, undefined, undefined, self.method, self.base_url);
+                    self.do_ajax(url, target, post_data, self.method, self.post_processor);
+                }
             }
-        }
-    }
-
-
-    static replace_to_ajax(elements, target, open_modal = false, method = 'POST', processor = undefined) {
-        for (let x = 0; x < elements.length; x++) {
-            const btn = elements[x];
-            const self = this;
-            let new_querystring = btn.getAttribute('href');
-            //let open_modal = btn.getAttribute('open_modal');
-            if (open_modal) {
-                btn.setAttribute('data-toggle', 'modal');
-                btn.setAttribute('data-target', open_modal);
-            }
-
-            btn.onclick = function (e) {
-                e.preventDefault();
-                let [url, post_data] = self.ajax_url(new_querystring, undefined, undefined,);
-                AJAXSubFrame.send_ajax_request(url, target, post_data, method, processor);
-            };
         }
     }
 }

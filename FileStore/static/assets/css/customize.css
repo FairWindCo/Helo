@@ -1,0 +1,16 @@
+tr.ajax_sub_row {
+    background-color: #ffffff;
+ }
+
+tr.ajax_sub_row  div.table-container{
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+tr.ajax_sub_row  div.table-container thead{
+    background-color: #c8c6c6;
+}
+
+tr.ajax_sub_row  div.table-container thead th{
+    border: none;
+}

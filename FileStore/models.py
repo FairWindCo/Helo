@@ -50,7 +50,7 @@ class ProjectFile(models.Model):
     class Meta:
         verbose_name = 'Файл'
         verbose_name_plural = 'Файлы'
-        ordering = ('filename', )
+        ordering = ('filename',)
         permissions = [('can_add_projectfile', 'Может добавлять файлы проектов'),
                        ('can_del_projectfile', 'Может удалять файлы проектов'),
                        ('can_upd_projectfile', 'Может изменять файлы проектов')]
@@ -96,7 +96,7 @@ class ProjectFile(models.Model):
 
             file, ext = os.path.splitext(self.file_path.path)
             if ext.startswith('.'):
-                ext=ext[1:]
+                ext = ext[1:]
             filetype = FileType.objects.get(mask__exact=ext)
             print(file)
             self.file_type = filetype
@@ -149,7 +149,8 @@ class Project(models.Model):
         return f'{self.name}'
 
     def get_absolute_url(self):
-        return reverse('project-update', kwargs={'pk': self.pk})
+        # return reverse('project-update', kwargs={'pk': self.pk})
+        return reverse('projects-list')
 
 
 class Tag(models.Model):
@@ -161,7 +162,7 @@ class Tag(models.Model):
     class Meta:
         verbose_name = 'Метка'
         verbose_name_plural = 'Метки'
-        ordering = ('name', )
+        ordering = ('name',)
 
     def __str__(self):
         return f'{self.name}'

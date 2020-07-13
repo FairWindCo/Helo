@@ -3,7 +3,7 @@
   <thead>
     <tr>
       <th scope="row">Название</th>
-      <td><a class="btn-info btn btn-sm" href="{% url 'download' object.pk %}">{{ object.filename }}</a></td>
+      <td><a class="btn-info btn btn-sm" data-modify-link="false" href="{% url 'download' object.pk %}" target="_blank">{{ object.filename }}</a></td>
       <th scope="row">Размер файла</th>
       <td>{{ object.size|filesizeformat }}</td>
     </tr>

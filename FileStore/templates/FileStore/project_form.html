@@ -1,1 +1,17 @@
-{% include "FileStore/_base_form.html" %}
+{% extends "FileStore/_base_form.html" %}
+
+{% block content-header-breadcamp %}
+    <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt">
+            {% block content-header-breadcamp-items %}
+                <li class="breadcrumb-item">
+                    <a href="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'projects-list' %}">Проекты</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Изменение проекта</li>
+            {% endblock %}
+        </ol>
+    </nav>
+{% endblock %}

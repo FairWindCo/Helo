@@ -1,9 +1,35 @@
 {% extends "FileStore/main_frame.html" %}
 {% load static %}
+
+{% block content-header-text %}
+    Проекты
+{% endblock %}
+
+{% block main-content-area-block-header %}
+    Список проектов
+{% endblock %}
+
+                            {% block content-header-breadcamp %}
+                            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                                <ol class="breadcrumb breadcrumb-alt">
+                                    {% block content-header-breadcamp-items %}
+                                    <li class="breadcrumb-item">
+                                        <a href="/">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="{% url 'projects-list' %}">Проекты</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">Список</li>
+                                    {% endblock %}
+                                </ol>
+                            </nav>
+                            {% endblock %}
+
+
 {% block main-content-area-block-content %}
     <script src="{% static '/assets/js/ajax_communicator.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/assets/css/customize.css' %}" />
     <div class="container">
-        <h1>Projects</h1>
         <table class="table table-responsive table-dark">
             <thead>
             <tr>
@@ -79,7 +105,7 @@
         <div class="modal-dialog modal-lg .modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Информация о файле</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
